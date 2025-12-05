@@ -1,1 +1,1 @@
-Sitemap: https://bookdown.org/federicagazzelloni/ACTEX_october2024/sitemap.xml
+Sitemap: https://fgazzelloni.github.io/ACTEX_october2024/sitemap.xml
