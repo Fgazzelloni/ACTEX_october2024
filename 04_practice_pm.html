@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Federica Gazzelloni and Farid Flici">
+<meta name="dcterms.date" content="2024-10-10">
+
+<title>Introduction to R and Basic Data Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05_final_project.html" rel="next">
+<link href="./03_introduction_to_pm.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-21a5f251cb0ef783ceb65b5a1ce2cde7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_practice_pm.html">Practice Predictive Modeling</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/actex_logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/actex_logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_introduction_to_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_practice_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_introduction_to_pm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Predictive Modeling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_practice_pm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Practice Predictive Modeling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_final_project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Project</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-into-practice-with-predictive-modeling" id="toc-getting-into-practice-with-predictive-modeling" class="nav-link active" data-scroll-target="#getting-into-practice-with-predictive-modeling">Getting into Practice with Predictive Modeling</a></li>
+  <li><a href="#predictive-data-modeling-workflow" id="toc-predictive-data-modeling-workflow" class="nav-link" data-scroll-target="#predictive-data-modeling-workflow">Predictive Data Modeling Workflow</a></li>
+  <li><a href="#example-1-predictive-modeling-with-insurance-data" id="toc-example-1-predictive-modeling-with-insurance-data" class="nav-link" data-scroll-target="#example-1-predictive-modeling-with-insurance-data">Example 1: Predictive Modeling with Insurance Data</a>
+  <ul class="collapse">
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection">Data Collection</a></li>
+  <li><a href="#data-cleaning-and-preparation" id="toc-data-cleaning-and-preparation" class="nav-link" data-scroll-target="#data-cleaning-and-preparation">Data Cleaning and Preparation</a></li>
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">Model Selection</a>
+  <ul class="collapse">
+  <li><a href="#linear-regression-modeling" id="toc-linear-regression-modeling" class="nav-link" data-scroll-target="#linear-regression-modeling">Linear Regression Modeling</a></li>
+  </ul></li>
+  <li><a href="#model-training" id="toc-model-training" class="nav-link" data-scroll-target="#model-training">Model Training</a></li>
+  <li><a href="#models-evaluation" id="toc-models-evaluation" class="nav-link" data-scroll-target="#models-evaluation">Models Evaluation</a>
+  <ul class="collapse">
+  <li><a href="#anova-test" id="toc-anova-test" class="nav-link" data-scroll-target="#anova-test">ANOVA Test</a></li>
+  <li><a href="#r-squared" id="toc-r-squared" class="nav-link" data-scroll-target="#r-squared">R-squared</a></li>
+  <li><a href="#mean-squared-error-mse" id="toc-mean-squared-error-mse" class="nav-link" data-scroll-target="#mean-squared-error-mse">Mean Squared Error (MSE)</a></li>
+  <li><a href="#root-mean-squared-error-rmse" id="toc-root-mean-squared-error-rmse" class="nav-link" data-scroll-target="#root-mean-squared-error-rmse">Root Mean Squared Error (RMSE)</a></li>
+  </ul></li>
+  <li><a href="#predicting-cumulative-paid-loss" id="toc-predicting-cumulative-paid-loss" class="nav-link" data-scroll-target="#predicting-cumulative-paid-loss">Predicting Cumulative Paid Loss</a></li>
+  </ul></li>
+  <li><a href="#example-2-predicting-lives-based-on-age-and-country" id="toc-example-2-predicting-lives-based-on-age-and-country" class="nav-link" data-scroll-target="#example-2-predicting-lives-based-on-age-and-country">Example 2: Predicting Lives Based on Age and Country</a>
+  <ul class="collapse">
+  <li><a href="#data-collection-1" id="toc-data-collection-1" class="nav-link" data-scroll-target="#data-collection-1">Data Collection</a></li>
+  <li><a href="#data-cleaning-and-preparation-1" id="toc-data-cleaning-and-preparation-1" class="nav-link" data-scroll-target="#data-cleaning-and-preparation-1">Data Cleaning and Preparation</a></li>
+  <li><a href="#data-merging-and-transformation" id="toc-data-merging-and-transformation" class="nav-link" data-scroll-target="#data-merging-and-transformation">Data Merging and Transformation</a></li>
+  <li><a href="#exploratory-data-analysis-eda-1" id="toc-exploratory-data-analysis-eda-1" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda-1">Exploratory Data Analysis (EDA)</a></li>
+  <li><a href="#model-selection-1" id="toc-model-selection-1" class="nav-link" data-scroll-target="#model-selection-1">Model Selection</a>
+  <ul class="collapse">
+  <li><a href="#generalized-additive-models-gams" id="toc-generalized-additive-models-gams" class="nav-link" data-scroll-target="#generalized-additive-models-gams">Generalized Additive Models (GAMs)</a></li>
+  </ul></li>
+  <li><a href="#model-training-1" id="toc-model-training-1" class="nav-link" data-scroll-target="#model-training-1">Model Training</a></li>
+  <li><a href="#models-evaluation-1" id="toc-models-evaluation-1" class="nav-link" data-scroll-target="#models-evaluation-1">Models Evaluation</a>
+  <ul class="collapse">
+  <li><a href="#akaike-information-criterion-aic" id="toc-akaike-information-criterion-aic" class="nav-link" data-scroll-target="#akaike-information-criterion-aic">Akaike Information Criterion (AIC)</a></li>
+  </ul></li>
+  <li><a href="#making-predictions" id="toc-making-predictions" class="nav-link" data-scroll-target="#making-predictions">Making Predictions</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Fgazzelloni/ACTEX_october2024/edit/main/04_practice_pm.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Fgazzelloni/ACTEX_october2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Introduction to R and Basic Data Analysis</h1>
+<p class="subtitle lead">ACTEX Learning - AFDP: R Session 2.2</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Federica Gazzelloni and Farid Flici </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 10, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="getting-into-practice-with-predictive-modeling" class="level1">
+<h1>Getting into Practice with Predictive Modeling</h1>
+<p>Predictive modeling is a specific, technical step within the broader process of predictive analytics. It involves creating a mathematical or machine learning model that can forecast future outcomes based on historical data. A predictive model is a representation of the relationships between variables (features) and the outcome you’re trying to predict (target). Various algorithms can be used to build these models, such as linear regression, decision trees, or neural networks.</p>
+<p>In actuarial science, predictive modeling is used to estimate future claims, analyze risk, and set insurance premiums. In this session, we will explore some practical examples of predictive modeling in actuarial contexts using R.</p>
+</section>
+<section id="predictive-data-modeling-workflow" class="level1">
+<h1>Predictive Data Modeling Workflow</h1>
+<center>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/2.2_flowchart.png" class="img-fluid figure-img"></p>
+<figcaption>FlowChart made with {DiagrammeR} package</figcaption>
+</figure>
+</div>
+</center>
+<ul>
+<li><strong>Data Collection</strong>: Gather relevant data on the variables you want to analyze. This data can come from internal sources (company databases) or external sources (public datasets).</li>
+<li><strong>Data Cleaning and Preparation</strong>: Clean the data by handling missing values, removing duplicates, and transforming variables. Prepare the data for analysis by creating features and a target variable.</li>
+<li><strong>Exploratory Data Analysis (EDA)</strong>: Explore the data to understand its structure, relationships, and patterns. Use visualizations and summary statistics to gain insights.</li>
+<li><strong>Model Selection</strong>: Choose an appropriate predictive model based on the nature of the data and the problem you want to solve. Common models include linear regression, logistic regression, decision trees, and neural networks.</li>
+<li><strong>Model Training</strong>: Split the data into training and testing sets. Train the model on the training data to learn the patterns in the data.</li>
+<li><strong>Model Evaluation</strong>: Evaluate the model’s performance using metrics like accuracy, precision, recall, or the area under the ROC curve. Adjust the model parameters if needed.</li>
+</ul>
+</section>
+<section id="example-1-predictive-modeling-with-insurance-data" class="level1">
+<h1>Example 1: Predictive Modeling with Insurance Data</h1>
+<p>In this example, we will work with real-world insurance data to perform predictive modeling. The data is related to <strong>medical malpractice – claims made</strong> and contains information on <strong>incurred losses</strong>, <strong>cumulative paid losses</strong>, <strong>earned premiums</strong>, and <strong>development lags</strong>.</p>
+<section id="data-collection" class="level2">
+<h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
+<p>The data is available in a <code>.CSV</code> file from the <strong>Casualty Actuarial Society (CAS)</strong> website. We will load the data into R for analysis. The data set contains run-off triangles. Upper and lower triangles data correspond to claims of accident year 1988 – 1997 with 10 years development lag.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>codebook</code> for the data can be found at the following link: <a href="https://www.casact.org/publications-research/research/research-resources/loss-reserving-data-pulled-naic-schedule-p">Loss Reserving Data Pulled from NAIC Schedule P</a></p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.casact.org/sites/default/files/2021-04/medmal_pos.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Downloaded data is now available in the <code>Global Environment</code>. It can be saved as a <code>.CSV</code> file for future use with the following code:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="st">"data/medmal_pos.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>medmal_pos <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/medmal_pos.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-cleaning-and-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning-and-preparation">Data Cleaning and Preparation</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3400   13</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 6
+Columns: 13
+$ GRCODE             &lt;dbl&gt; 669, 669, 669, 669, 669, 669
+$ GRNAME             &lt;chr&gt; "Scpie Indemnity Co", "Scpie Indemnity Co", "Scpie …
+$ AccidentYear       &lt;dbl&gt; 1988, 1988, 1988, 1988, 1988, 1988
+$ DevelopmentYear    &lt;dbl&gt; 1988, 1989, 1990, 1991, 1992, 1993
+$ DevelopmentLag     &lt;dbl&gt; 1, 2, 3, 4, 5, 6
+$ IncurLoss_F2       &lt;dbl&gt; 121905, 112211, 103226, 99599, 96006, 90487
+$ CumPaidLoss_F2     &lt;dbl&gt; 2716, 24576, 43990, 59722, 71019, 76354
+$ BulkLoss_F2        &lt;dbl&gt; 97966, 64117, 39008, 20736, 13599, 10577
+$ EarnedPremDIR_F2   &lt;dbl&gt; 129104, 129104, 129104, 129104, 129104, 129104
+$ EarnedPremCeded_F2 &lt;dbl&gt; -6214, -6214, -6214, -6214, -6214, -6214
+$ EarnedPremNet_F2   &lt;dbl&gt; 135318, 135318, 135318, 135318, 135318, 135318
+$ Single             &lt;dbl&gt; 0, 0, 0, 0, 0, 0
+$ PostedReserve97_F2 &lt;dbl&gt; 344558, 344558, 344558, 344558, 344558, 344558</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(IncurLoss_F2, CumPaidLoss_F2, BulkLoss_F2, EarnedPremNet_F2) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  IncurLoss_F2    CumPaidLoss_F2    BulkLoss_F2       EarnedPremNet_F2
+ Min.   :   -17   Min.   : -1190   Min.   :-32101.0   Min.   :  -728  
+ 1st Qu.:     0   1st Qu.:     0   1st Qu.:     0.0   1st Qu.:     0  
+ Median :   645   Median :   187   Median :     0.0   Median :  1302  
+ Mean   : 11609   Mean   :  6706   Mean   :  1095.8   Mean   : 12308  
+ 3rd Qu.:  9050   3rd Qu.:  4386   3rd Qu.:   107.2   3rd Qu.: 13490  
+ Max.   :179425   Max.   :113189   Max.   :104402.0   Max.   :135318  </code></pre>
+</div>
+</div>
+<p>We can use the <code>summary()</code> function to get a quick overview of the data, including the mean, median, minimum, and maximum values for each variable, or the <code>count()</code> function to count the number of observations in the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(DevelopmentLag) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> DevelopmentLag
+ Min.   : 1.0  
+ 1st Qu.: 3.0  
+ Median : 5.5  
+ Mean   : 5.5  
+ 3rd Qu.: 8.0  
+ Max.   :10.0  </code></pre>
+</div>
+</div>
+<p>Then we create a tailored dataset containing only the claims with a development lag of 5 years or more:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lag5plus <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DevelopmentLag <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(GRNAME, AccidentYear, IncurLoss_F2, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>         CumPaidLoss_F2, EarnedPremNet_F2, DevelopmentLag) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">IncurLoss =</span> IncurLoss_F2,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">CumPaidLoss =</span> CumPaidLoss_F2,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">EarnedPremNet =</span> EarnedPremNet_F2) <span class="sc">%&gt;%</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the model will treat each year as an independent category.</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AccidentYear =</span> <span class="fu">as.factor</span>(AccidentYear))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lag5plus <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    GRNAME           AccidentYear   IncurLoss       CumPaidLoss    
+ Length:2040        1988   :204   Min.   :   -17   Min.   :   -23  
+ Class :character   1989   :204   1st Qu.:     0   1st Qu.:     0  
+ Mode  :character   1990   :204   Median :   579   Median :   464  
+                    1991   :204   Mean   : 10497   Mean   :  8842  
+                    1992   :204   3rd Qu.:  8144   3rd Qu.:  6899  
+                    1993   :204   Max.   :146354   Max.   :113189  
+                    (Other):816                                    
+ EarnedPremNet    DevelopmentLag
+ Min.   :  -728   Min.   : 5.0  
+ 1st Qu.:     0   1st Qu.: 6.0  
+ Median :  1302   Median : 7.5  
+ Mean   : 12308   Mean   : 7.5  
+ 3rd Qu.: 13490   3rd Qu.: 9.0  
+ Max.   :135318   Max.   :10.0  
+                                </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>top_5GR <span class="ot">&lt;-</span> lag5plus <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GRNAME) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_IncurLoss =</span> <span class="fu">mean</span>(IncurLoss),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_CumPaidLoss =</span> <span class="fu">mean</span>(CumPaidLoss),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_diff =</span> mean_IncurLoss <span class="sc">-</span> mean_CumPaidLoss) <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_CumPaidLoss)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>top_5GR</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  GRNAME                     mean_IncurLoss mean_CumPaidLoss mean_diff
+  &lt;chr&gt;                               &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+1 Scpie Indemnity Co                 90386.           85972.     4414.
+2 Physicians Recip Insurers         103508.           74228.    29280.
+3 State Volunteer Mut Ins Co         42873.           34267.     8606.
+4 Promutual Grp                      30437.           27381.     3055.
+5 Markel Corp Grp                    14647.           13915.      732.</code></pre>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis-eda" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h2>
+<p>We create a <code>scatterplot</code> for representing the relationship between <code>IncurLoss</code> and <code>CumPaidLoss</code> for both, the entire dataset and for claims with a development lag of 5 years or more:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> IncurLoss_F2, <span class="at">y =</span> CumPaidLoss_F2)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative Paid Loss vs. Incurred Loss"</span>, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Incurred Loss"</span>, <span class="at">y =</span> <span class="st">"Cumulative Paid Loss"</span>) </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot2  </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Claims with a development lag of 5 years or more</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lag5plus, <span class="fu">aes</span>(<span class="at">x =</span> IncurLoss, <span class="at">y =</span> CumPaidLoss)) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative Paid Loss vs. Incurred Loss"</span>, </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Development Lag &gt;= 5"</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Incurred Loss"</span>, <span class="at">y =</span> <span class="st">"Cumulative Paid Loss"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="04_practice_pm_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="04_practice_pm_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>We can see how the spread of the data points changes when we filter the data for claims with a development lag of 5 years or more. The linear relationship between <code>IncurLoss</code> and <code>CumPaidLoss</code> is more evident in the filtered data.</p>
+</section>
+<section id="model-selection" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection">Model Selection</h2>
+<p>As the relationship between Cumulative Paid Loss and Incurred Loss is linear, we can use a <code>linear regression model</code> to predict Cumulative Paid Loss based on Incurred Loss, Earned Premium, Accident Year, and Development Lag.</p>
+<section id="linear-regression-modeling" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-modeling">Linear Regression Modeling</h3>
+<p>The linear regression model is a statistical method used to model the relationship between a dependent variable and one or more independent variables. The model assumes a linear relationship between the variables and can be represented as follows:</p>
+<center>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/2.2_lm.png" class="img-fluid figure-img"></p>
+<figcaption>ACTEX Learning: Linear Regression Model</figcaption>
+</figure>
+</div>
+</center>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X + \epsilon\]</span></p>
+<p>Where, <span class="math inline">\(Y\)</span> is the dependent variable, <span class="math inline">\(X\)</span> is the independent variable.</p>
+<p><span class="math inline">\(\beta_0\)</span> is the intercept of the line, representing the baseline number of lives when age is zero, and can be calculated as follows:</p>
+<p><span class="math display">\[\beta_0 = \bar{Y} - \beta_1 \bar{X}\]</span></p>
+<p><span class="math inline">\(\beta_1\)</span> is the coefficient of the model, and can be calculated as follows:</p>
+<p><span class="math display">\[\beta_1 = \frac{Cov(X,Y)}{Var(X)} = \frac{\sum_{i=1}^{n}(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i=1}^{n}(X_i - \bar{X})^2}\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R we can calculate the coefficients of the model using the specific model function, such as <code>lm()</code>, or <code>glm()</code>. The slope (<span class="math inline">\(\beta_i\)</span>) and intercept (<span class="math inline">\(\beta_0\)</span>) can be retrieved from the model summary.</p>
+<p>To calculate them directly, we can use the following code:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> <span class="fu">cov</span>(x, y) <span class="sc">/</span> <span class="fu">var</span>(x)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> <span class="fu">mean</span>(y) <span class="sc">-</span> slope <span class="sc">*</span> <span class="fu">mean</span>(x)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> intercept <span class="sc">+</span> slope <span class="sc">*</span> x</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>y_hat_dist <span class="ot">&lt;-</span> <span class="fu">abs</span>(y <span class="sc">-</span> y_hat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>The objective is to minimize the sum of squared errors (SSE) between the predicted values and the actual values.</p>
+<p><span class="math display">\[SSE = \sum_{i=1}^{n}(Y_i - \hat{Y_i})^2\]</span> Evaluating the model with the following metrics:</p>
+<ul>
+<li><strong>R-squared</strong>: The proportion of the variance in the dependent variable that is predictable from the independent variable(s). <span class="math display">\[R^2 = 1 - \frac{SSE}{SST}\]</span></li>
+<li><strong>Mean Absolute Error (MAE)</strong>: The average of the absolute differences between predicted and actual values. <span class="math display">\[MAE = \frac{1}{n} \sum_{i=1}^{n}|Y_i - \hat{Y_i}|\]</span></li>
+<li><strong>Mean Squared Error (MSE)</strong>: The average of the squared differences between predicted and actual values. <span class="math display">\[MSE = \frac{1}{n} \sum_{i=1}^{n}(Y_i - \hat{Y_i})^2\]</span></li>
+<li><strong>Root Mean Squared Error (RMSE)</strong>: The square root of the average of the squared differences between predicted and actual values. <span class="math display">\[RMSE = \sqrt{MSE}\]</span></li>
+</ul>
+</section>
+</section>
+<section id="model-training" class="level2">
+<h2 class="anchored" data-anchor-id="model-training">Model Training</h2>
+<p>We will create a <code>training</code> and a <code>test</code> dataset to train the model and evaluate its performance.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and test sets</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>train_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(lag5plus), </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(lag5plus),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> lag5plus[train_index, ]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> lag5plus[<span class="sc">-</span>train_index, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>train_data</code> will be used to fit the model, while the <code>test_data</code> will be used to evaluate the model’s performance.</p>
+<p><strong>Fitting a regression line model with only one predictor</strong></p>
+<p>We use the <code>lm()</code> function to fit a linear regression model with the CumPaidLoss as the dependent variable and IncurLoss as the predictor variable. The formula for the model is <code>CumPaidLoss ~ IncurLoss</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a linear regression model</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> CumPaidLoss <span class="sc">~</span> IncurLoss, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train_data)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View the model summary</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = CumPaidLoss ~ IncurLoss, data = train_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-54129   -312   -312    169  18408 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3.117e+02  1.298e+02   2.401   0.0165 *  
+IncurLoss   8.100e-01  4.911e-03 164.956   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4811 on 1630 degrees of freedom
+Multiple R-squared:  0.9435,    Adjusted R-squared:  0.9434 
+F-statistic: 2.721e+04 on 1 and 1630 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<hr>
+<p>The output of the linear regression model provides information about the coefficients of the model, their significance, and the overall fit of the model to the data.</p>
+<p>In this case we used a simple regression model with one predictor (IncurLoss) to predict the CumPaidLoss. The coefficients of the model represent the relationship between the predictor variable and the outcome variable.</p>
+<p>The results show, the <code>coefficient</code> for IncurLoss is 8.100e-01 and indicates that for each unit increase in IncurLoss, the CumPaidLoss is expected to increase by 8.100e-01 units.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the number</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fl">8.100e-01</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>num</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.81</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Force the display of the number in scientific notation</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(num, <span class="at">scientific =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "8.1e-01"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Force the display of the number without scientific notation</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(num, <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0.81"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>The <code>p-value</code> associated with the coefficient is less than 0.05, indicating that the coefficient is statistically significant in predicting the outcome.</p>
+<p>The <code>R-squared</code> value measures how well the model explains the variance in the data, with higher values indicating a better fit. In this case it explains ~94% of the variance in the data.</p>
+<p>We have used only one predictor variable in this model, but you can include additional variables like EarnedPremNet, AccidentYear, and DevelopmentLag to build a more complex model.</p>
+<p><strong>Fitting a multiple regression model</strong>:</p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a multiple linear regression model</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(CumPaidLoss <span class="sc">~</span> IncurLoss <span class="sc">+</span> EarnedPremNet <span class="sc">+</span> AccidentYear <span class="sc">+</span> DevelopmentLag, </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train_data)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the model summary</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = CumPaidLoss ~ IncurLoss + EarnedPremNet + AccidentYear + 
+    DevelopmentLag, data = train_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-39813  -1131     88   1182  20446 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      -5.925e+03  5.515e+02 -10.745  &lt; 2e-16 ***
+IncurLoss         4.652e-01  1.680e-02  27.694  &lt; 2e-16 ***
+EarnedPremNet     3.431e-01  1.621e-02  21.164  &lt; 2e-16 ***
+AccidentYear1989  2.945e+02  4.540e+02   0.649  0.51664    
+AccidentYear1990  3.961e+02  4.635e+02   0.855  0.39295    
+AccidentYear1991  1.461e+03  4.590e+02   3.182  0.00149 ** 
+AccidentYear1992  1.411e+03  4.574e+02   3.085  0.00207 ** 
+AccidentYear1993  2.124e+03  4.660e+02   4.559 5.54e-06 ***
+AccidentYear1994  2.306e+03  4.601e+02   5.013 5.95e-07 ***
+AccidentYear1995  2.235e+03  4.576e+02   4.885 1.14e-06 ***
+AccidentYear1996  2.063e+03  4.550e+02   4.534 6.22e-06 ***
+AccidentYear1997  2.878e+03  4.586e+02   6.275 4.47e-10 ***
+DevelopmentLag    5.472e+02  6.001e+01   9.117  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4128 on 1619 degrees of freedom
+Multiple R-squared:  0.9587,    Adjusted R-squared:  0.9584 
+F-statistic:  3130 on 12 and 1619 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<hr>
+<p>The results of the multiple linear regression model provide information about the coefficients of the model for each predictor variable, their significance, and the overall fit of the model to the data.</p>
+<p>The coefficients for the predictor variables indicate how they influence the predicted CumPaidLoss. All coefficients are positives and statistically significant, this means that all predictor variables have a positive impact on the CumPaidLoss.</p>
+</section>
+<section id="models-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="models-evaluation">Models Evaluation</h2>
+<section id="anova-test" class="level3">
+<h3 class="anchored" data-anchor-id="anova-test">ANOVA Test</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model1, model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: CumPaidLoss ~ IncurLoss
+Model 2: CumPaidLoss ~ IncurLoss + EarnedPremNet + AccidentYear + DevelopmentLag
+  Res.Df        RSS Df  Sum of Sq      F    Pr(&gt;F)    
+1   1630 3.7728e+10                                   
+2   1619 2.7586e+10 11 1.0142e+10 54.113 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The ANOVA test compares the two models to determine if the additional predictor variables in model 2 significantly improve the model fit compared to model 1.</p>
+<p>In this test the null hypothesis is that the two models are equal, and the alternative hypothesis is that the two models are different.</p>
+<p>A p-value less than 0.05 indicates that model 2 is a better fit for the data than model 1.</p>
+</section>
+<section id="r-squared" class="level3">
+<h3 class="anchored" data-anchor-id="r-squared">R-squared</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the R-squared </span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)<span class="sc">$</span>r.squared;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.943482</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)<span class="sc">$</span>r.squared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9586755</code></pre>
+</div>
+</div>
+<p>The <code>R-squared</code> value measures how well the model explains the variance in the data, with higher values indicating a better fit. In this case, model 2 has a higher R-squared value than model 1, indicating that it explains more of the variance in the data.</p>
+</section>
+<section id="mean-squared-error-mse" class="level3">
+<h3 class="anchored" data-anchor-id="mean-squared-error-mse">Mean Squared Error (MSE)</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean Squared Error (MSE)</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(model1<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23117737</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(model2<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16903090</code></pre>
+</div>
+</div>
+<p><code>Mean Squared Error (MSE)</code> is a measure of the model’s accuracy, with lower values indicating a better fit to the data. The model with the lower MSE is considered more accurate in predicting the outcome.</p>
+<p>Model 1 and model 2 released a MSE of 23117737 and 16903090, respectively, which means that model 2 is more accurate in predicting the CumPaidLoss. And in terms of units, the MSE is in squared currency units. And so, ($)16903090 is the average squared error in predicting the CumPaidLoss. So, we can commit an error of ($)16903090 in our predictions.</p>
+</section>
+<section id="root-mean-squared-error-rmse" class="level3">
+<h3 class="anchored" data-anchor-id="root-mean-squared-error-rmse">Root Mean Squared Error (RMSE)</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>(model1<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>));</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4808.091</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>(model2<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4111.337</code></pre>
+</div>
+</div>
+<p>The <code>Root Mean Squared Error (RSME)</code> is a measure of the model’s accuracy, and the closer it is to zero, the better the model fits the data, with lower values indicating a better fit to the data. The RMSE is in the same units as the dependent variable (CumPaidLoss).</p>
+<p>An RMSE value of ($)4,111.337 represents the average deviation of the predicted values from the actual values in the same units as the dependent variable.</p>
+</section>
+</section>
+<section id="predicting-cumulative-paid-loss" class="level2">
+<h2 class="anchored" data-anchor-id="predicting-cumulative-paid-loss">Predicting Cumulative Paid Loss</h2>
+<p>Based on the metric results from both models, we select <code>model2</code> to estimate the CumPaidLoss values on different data than the training set used to fit the model.</p>
+<p>Prediction generally refers to estimating an outcome based on known input variables. The goal is to predict outcomes for new observations within the range of the data used to train the model. In prediction, you’re often working with data that is either currently available or similar to what you’ve already observed. The prediction is based on patterns learned from historical data.</p>
+<p>To test the predictions capability of model2, we use the <code>predict()</code> function on the <code>test_data</code> as follows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the cumulative paid loss for the test data</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>predictions_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(model2, test_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then, we can visualize the actual vs.&nbsp;predicted values using a scatter plot:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot actual vs. predicted values</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> CumPaidLoss, <span class="at">y =</span> predictions_test)) <span class="sc">+</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Actual vs. Predicted Cumulative Paid Loss"</span>, </span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Actual"</span>, <span class="at">y =</span> <span class="st">"Predicted"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_practice_pm_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also use the model to estimate the CumPaidLoss for <code>new data</code> points. For example, we can create a new dataset with specific values for the predictor variables and use the models to predict the CumPaidLoss.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new dataset for predictions (optional)</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">AccidentYear =</span> <span class="fu">factor</span>(<span class="dv">1995</span>),</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">DevelopmentLag =</span> <span class="dv">5</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">IncurLoss =</span> <span class="dv">100000</span>,</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">EarnedPremNet =</span> <span class="dv">150000</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the cumulative paid loss for new data</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(model2, new_data)</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>predictions</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+97030.53 </code></pre>
+</div>
+</div>
+<p>Visualize the predicted value on observed data:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lag5plus, </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> IncurLoss, <span class="at">y =</span> CumPaidLoss)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">x =</span> new_data<span class="sc">$</span>IncurLoss, <span class="at">y =</span> predictions, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">linewidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicting Cumulative Paid Loss"</span>, </span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="at">x =</span> <span class="st">"Incurred Loss"</span>, <span class="at">y =</span> <span class="st">"Cumulative Paid Loss"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_practice_pm_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="example-2-predicting-lives-based-on-age-and-country" class="level1">
+<h1>Example 2: Predicting Lives Based on Age and Country</h1>
+<p>The data for this example is from the <code>lifecontingencies</code> package, which contains various datasets related to actuarial science. You don’t need to install the package, as data is made available in the <code>data</code> folder of the lesson as <code>.RData</code> file.</p>
+<p>We will use demographic data for France and Germany to build a linear regression model to predict future lives based on age and country.</p>
+<section id="data-collection-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-collection-1">Data Collection</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/demo_data.RData"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="data-cleaning-and-preparation-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning-and-preparation-1">Data Cleaning and Preparation</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>raw_Germany <span class="ot">&lt;-</span> demoGermany</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(raw_Germany)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x   qxMale qxFemale
+1 0 0.000113  5.9e-05
+2 1 0.000113  5.9e-05
+3 2 0.000113  5.9e-05
+4 3 0.000113  5.9e-05
+5 4 0.000113  5.9e-05
+6 5 0.000113  5.9e-05</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>livesGermany <span class="ot">&lt;-</span> raw_Germany <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">age =</span> x) <span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, <span class="at">qx =</span> qxMale) <span class="sc">%&gt;%</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">px =</span> <span class="dv">1</span> <span class="sc">-</span> qx,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">lives =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">head</span>(<span class="fu">lead</span>(px), <span class="sc">-</span><span class="dv">1</span>)),</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">lives =</span> <span class="fu">as.integer</span>(<span class="fl">100e3</span><span class="sc">*</span><span class="fu">cumprod</span>(lives))) <span class="sc">%&gt;%</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, lives)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(livesGermany)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age  lives
+1   0 100000
+2   1  99988
+3   2  99977
+4   3  99966
+5   4  99954
+6   5  99943</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>raw_France <span class="ot">&lt;-</span> demoFrance</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(raw_France)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age TH00_02 TF00_02 TD88_90 TV88_90
+1   0  100000  100000  100000  100000
+2   1   99511   99616   99129   99352
+3   2   99473   99583   99057   99294
+4   3   99446   99562   99010   99261
+5   4   99424   99545   98977   99236
+6   5   99406   99531   98948   99214</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>livesFrance <span class="ot">&lt;-</span> raw_France <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, <span class="at">lives =</span> TH00_02)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(livesFrance)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age  lives
+1   0 100000
+2   1  99511
+3   2  99473
+4   3  99446
+5   4  99424
+6   5  99406</code></pre>
+</div>
+</div>
+</section>
+<section id="data-merging-and-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="data-merging-and-transformation">Data Merging and Transformation</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>tbl_mortality <span class="ot">&lt;-</span> livesFrance <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">France =</span> lives) <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(livesGermany <span class="sc">%&gt;%</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">rename</span>(<span class="at">Germany =</span> lives), <span class="at">by =</span> <span class="st">"age"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"France"</span>,<span class="st">"Germany"</span>), </span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Country"</span>, </span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Lives"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Lives))</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tbl_mortality)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+    age Country  Lives
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+1     0 France  100000
+2     0 Germany 100000
+3     1 France   99511
+4     1 Germany  99988
+5     2 France   99473
+6     2 Germany  99977</code></pre>
+</div>
+</div>
+<p>We can also calculate the mean and standard deviation of the age and lives by country using the <code>dplyr</code> package:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>tbl_mortality <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_lives =</span> <span class="fu">mean</span>(Lives),</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age),</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_lives =</span> <span class="fu">sd</span>(Lives))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  Country mean_age mean_lives sd_age sd_lives
+  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+1 France      56       67263.   32.8   38271.
+2 Germany     55.5     73888.   32.5   34915.</code></pre>
+</div>
+</div>
+<p>And the mean of the numeric variables in the dataset:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>tbl_mortality <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dbl</span>(mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        age       Lives 
+   55.75111 70561.13778 </code></pre>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis-eda-1" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-eda-1">Exploratory Data Analysis (EDA)</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tbl_mortality, </span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> Lives, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Lives by Age and Country"</span>, </span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Lives"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_practice_pm_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-selection-1" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection-1">Model Selection</h2>
+<p>Visualize the relationship between age and lives by country:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tbl_mortality, </span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> Lives)) <span class="sc">+</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">linetype =</span> Country)) <span class="sc">+</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"gam"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Lives by Age and Country"</span>, </span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Lives"</span>,</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Linear (blue) vs. GAM Model (green)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_practice_pm_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="generalized-additive-models-gams" class="level3">
+<h3 class="anchored" data-anchor-id="generalized-additive-models-gams">Generalized Additive Models (GAMs)</h3>
+<p>The model that would best fit the data is a <code>Generalized Additive Model (GAM)</code>, it allows for non-linear relationships between the predictors and the response variable. The GAM model can capture more complex patterns in the data compared to a linear model.</p>
+<p>To fit a GAM model, we can use the <code>glm()</code> function with the <code>family = gaussian()</code> argument to specify the Gaussian distribution for the response variable. The <code>glm()</code> function allows us to fit a variety of models, including linear regression, logistic regression, and generalized linear models (GLMs).</p>
+<p>The formula for GAMs model is:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 f(X_1) + \epsilon\]</span></p>
+<p>Where, <span class="math inline">\(Y\)</span> is the dependent variable, <span class="math inline">\(f(X_1)\)</span> is a smooth function of the predictor variable, and <span class="math inline">\(\epsilon\)</span> is the error term.</p>
+<p>The residuals can follow different distributions depending on the type of model. In this case, we assume that the residuals follow a Gaussian distribution: <span class="math inline">\(\epsilon \sim N(0, \sigma^2)\)</span></p>
+<p><span class="math display">\[\epsilon = Y - \hat{Y}\]</span></p>
+<p>Let’s construct a GAM model to predict the number of lives based on age and country, using the <code>poly()</code> function to include a polynomial term for age:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X^2 + \beta_2 X + \epsilon\]</span></p>
+</section>
+</section>
+<section id="model-training-1" class="level2">
+<h2 class="anchored" data-anchor-id="model-training-1">Model Training</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and test sets</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>train_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(tbl_mortality), </span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(tbl_mortality),</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> tbl_mortality[train_index, ]</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> tbl_mortality[<span class="sc">-</span>train_index, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>gam_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">formula =</span> Lives <span class="sc">~</span> <span class="fu">poly</span>(age, <span class="dv">2</span>) <span class="sc">+</span> Country, </span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> train_data)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gam_model)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Lives ~ poly(age, 2) + Country, data = train_data)
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      69372.9      717.8  96.652  &lt; 2e-16 ***
+poly(age, 2)1  -434010.8     6888.6 -63.004  &lt; 2e-16 ***
+poly(age, 2)2  -203229.3     6880.5 -29.537  &lt; 2e-16 ***
+CountryGermany    5455.4     1027.1   5.311 3.26e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 47341820)
+
+    Null deviance: 2.4087e+11  on 179  degrees of freedom
+Residual deviance: 8.3322e+09  on 176  degrees of freedom
+AIC: 3697.9
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<hr>
+<p>Looking at the meaning of the model output, the coefficients represent the expected count of lives. The coefficient for Germany (5455.4) indicates that the expected count of lives in Germany is higher than in France, after controlling for age.</p>
+<p>poly(age, 2) coefficients results are negatives, which means that the expected count of lives decreases with age, but the rate of decrease slows down as age increases.</p>
+</section>
+<section id="models-evaluation-1" class="level2">
+<h2 class="anchored" data-anchor-id="models-evaluation-1">Models Evaluation</h2>
+<section id="akaike-information-criterion-aic" class="level3">
+<h3 class="anchored" data-anchor-id="akaike-information-criterion-aic">Akaike Information Criterion (AIC)</h3>
+<p>The <code>Akaike Information Criterion (AIC)</code> is a measure of the model’s goodness of fit, balancing the trade-off between model complexity and accuracy. Lower AIC values indicate a better fit to the data.</p>
+<p><span class="math display">\[AIC = 2k - 2ln(L)\]</span></p>
+<p>Where, <span class="math inline">\(k\)</span> is the number of parameters in the model, and <span class="math inline">\(L\)</span> is the likelihood of the model given the data.</p>
+<p><span class="math display">\[L = \prod_{i=1}^{n} f(y_i | x_i)\]</span> In this case <span class="math inline">\(f(y_i | x_i)\)</span> is the probability density function of the Gaussian distribution.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(gam_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3697.896</code></pre>
+</div>
+</div>
+<p>When comparing the AIC values of the linear model and the GAM model, the GAM model has a lower AIC value, indicating a better fit to the data.</p>
+</section>
+</section>
+<section id="making-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="making-predictions">Making Predictions</h2>
+<p>Here we test the predictions of the GLM and GAM models:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions with the GLM model</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>gam_predictions_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(gam_model, </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>                                test_data, </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">type =</span> <span class="st">"response"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(test_data, gam_predictions_test) <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> Lives, <span class="at">group =</span> Country)) <span class="sc">+</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> gam_predictions_test, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Country) <span class="sc">+</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicting Lives by Age and Country"</span>, </span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Lives"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_practice_pm_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new data frame for predictions</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">55</span>, <span class="at">Country =</span> <span class="st">"Germany"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions with the GLM model</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>gam_predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(gam_model, </span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>                           new_data, </span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>gam_predictions</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      1 
+90916.2 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the model</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tbl_mortality, </span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> Lives)) <span class="sc">+</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">linetype =</span> Country), <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"gam"</span>,</span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">linewidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">x =</span> <span class="dv">55</span>, <span class="at">y =</span> gam_predictions, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicting Lives by Age and Country"</span>, </span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Lives Remaining"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_practice_pm_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To further understand how the model works, you can explore the <code>predict()</code> function with the <code>?predict()</code> command in R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">predict</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this session, we have explored practical examples of predictive modeling in actuarial contexts. We started by building a linear regression model to predict Cumulative Paid Loss based on Incurred Loss, Earned Premium, Accident Year, and Development Lag using real-world insurance data. We then moved on to predicting future lives based on age and country using demographic data for France and Germany with a Generalized Linear Model (GLM) and a Generalized Additive Model (GAM).</p>
+<p>Predictive modeling is a powerful tool in actuarial science, allowing actuaries to forecast future outcomes based on historical data. By applying these techniques, actuaries can gain valuable insights into risk assessment, claim estimation, and premium setting, contributing to the stability and profitability of insurance companies.</p>
+<p>Keep practicing and exploring different datasets to enhance your skills in predictive modeling and data analysis in the actuarial field. Happy modeling!</p>
+</section>
+<section id="resources" class="level1">
+<h1>Resources</h1>
+<ul>
+<li><a href="https://info.actexmadriver.com/r-for-actuaries">R for Actuaries and Data Scientists</a></li>
+<li><a href="https://www.casact.org/">Casualty Actuarial Society (CAS)</a></li>
+<li><a href="https://link.springer.com/book/10.1007/978-3-031-12409-9">Statistical Foundations of Actuarial Learning and its Applications</a></li>
+<li><a href="https://www.amazon.com/Actuaries-Data-Scientist-Applications-Insurance/dp/164756316X">R for Actuaries and Data Scientist with Applications to Insurance</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bookdown\.org\/federicagazzelloni\/ACTEX_october2024\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_introduction_to_pm.html" class="pagination-link" aria-label="Introduction to Predictive Modeling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction to Predictive Modeling</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_final_project.html" class="pagination-link" aria-label="Final Project">
+        <span class="nav-page-text">Final Project</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© CC-By AFDP 2024 - ACTEX Learning</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Fgazzelloni/ACTEX_october2024/edit/main/04_practice_pm.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Fgazzelloni/ACTEX_october2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,542 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "This course is designed to introduce actuarial students to the R programming language",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#instructors",
+    "href": "index.html#instructors",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName: Federica Gazzelloni, IIA\nEmail: fede.gazzelloni@gmail.com\nWebsite: federicagazzelloni.com\nLinkedIn: federicagazzelloni\n\n\n\nName: Farid Flici, PHD\nEmail: farid.flici@gmail.com\nWebsite: farid-flici.github.io\nLinkedIn: faridflici\n\n\nCourse Description\nThis course is designed to equip you with the technical skills to use R in actuarial science. You’ll gain the necessary knowledge to succeed in the rapidly evolving world of risk analysis, insurance, and finance. Throughout the program, you’ll discover the power of R, one of the most widely-used programming languages in statistics and actuarial science, for performing essential tasks like pricing, reserving, and risk management.\nWhether you’re just starting out or looking to enhance your current skill set, this course offers a comprehensive approach to understanding actuarial concepts, from data manipulation and visualization to advanced statistical modeling. Our lessons will take you step-by-step through real-world applications, providing hands-on experience with the types of challenges actuaries face every day.\n\nLearning Objectives\nBy the end of this course, you’ll be able to:\n\nBuild and analyze actuarial models using R.\nApply statistical methods to pricing, reserving, and risk management.\nInterpret and visualize data to inform key business decisions.\nUse predictive analytics to forecast trends and outcomes.\n\n\nPrerequisites\nThis program is designed for both aspiring and experienced actuaries who want to deepen their expertise in data analysis and programming.\n\nBasic knowledge of actuarial and statistics concepts\nBasic knowledge of programming\n\n\nCourse Outline\nThe course is divided in two sessions of 2 hours each. The first session will cover the basics of R programming, while the second session will focus on predictive modeling.\n\nDay 1: Introduction to R\n\nIntroduction to R\nData types and structures\nExample 1: Data simulation and visualization\nExample 2: Data manipulation and visualization\n\n\n\nDay 2: Predictive Modeling\n\nIntroduction to Predictive Modeling\nExample 1: Linear Regression\nExample 2: Generalized Additive Models\nFinal Project Outline\n\n\n\nCourse Materials\n\nSlides and compressed files: https://www.actuarialuniversity.com/seminar/View/14826\nGithub repository: https://github.com/Fgazzelloni/ACTEX_october2024\nResources at the end of each lesson.\n\n\nCourse Evaluation\nFinal Project (100%) - The final project will be a data analysis project that will require students to apply the concepts learned in the course.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#course-description",
+    "href": "index.html#course-description",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Course Description",
+    "text": "Course Description\nThis course is designed to equip you with the technical skills to use R in actuarial science. You’ll gain the necessary knowledge to succeed in the rapidly evolving world of risk analysis, insurance, and finance. Throughout the program, you’ll discover the power of R, one of the most widely-used programming languages in statistics and actuarial science, for performing essential tasks like pricing, reserving, and risk management.\nWhether you’re just starting out or looking to enhance your current skill set, this course offers a comprehensive approach to understanding actuarial concepts, from data manipulation and visualization to advanced statistical modeling. Our lessons will take you step-by-step through real-world applications, providing hands-on experience with the types of challenges actuaries face every day.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this course, you’ll be able to:\n\nBuild and analyze actuarial models using R.\nApply statistical methods to pricing, reserving, and risk management.\nInterpret and visualize data to inform key business decisions.\nUse predictive analytics to forecast trends and outcomes.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nThis program is designed for both aspiring and experienced actuaries who want to deepen their expertise in data analysis and programming.\n\nBasic knowledge of actuarial and statistics concepts\nBasic knowledge of programming",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#course-outline",
+    "href": "index.html#course-outline",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Course Outline",
+    "text": "Course Outline\nThe course is divided in two sessions of 2 hours each. The first session will cover the basics of R programming, while the second session will focus on predictive modeling.\n\nDay 1: Introduction to R\n\nIntroduction to R\nData types and structures\nExample 1: Data simulation and visualization\nExample 2: Data manipulation and visualization\n\n\n\nDay 2: Predictive Modeling\n\nIntroduction to Predictive Modeling\nExample 1: Linear Regression\nExample 2: Generalized Additive Models\nFinal Project Outline",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Course Materials",
+    "text": "Course Materials\n\nSlides and compressed files: https://www.actuarialuniversity.com/seminar/View/14826\nGithub repository: https://github.com/Fgazzelloni/ACTEX_october2024\nResources at the end of each lesson.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#course-evaluation",
+    "href": "index.html#course-evaluation",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Course Evaluation",
+    "text": "Course Evaluation\nFinal Project (100%) - The final project will be a data analysis project that will require students to apply the concepts learned in the course.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "01_introduction_to_r.html",
+    "href": "01_introduction_to_r.html",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "If you haven’t already, please install R and RStudio on your computer:\n\nFollow this link: https://posit.co/download/rstudio-desktop/\n\n\nInstall R\nInstall RStudio\n\n\n\n\n\nSetup RStudio-Desktop\n\n\n\n\n\n\nDownload the material for this session from the Actuarial University Dashboard using the course link below: https://www.actuarialuniversity.com/seminar/View/14826. You’ll find a Session1.zip file with all the necessary files. Make sure to unzip the file in a location you can easily access.\nOpen RStudio and install the necessary packages with the following command:\n\n\ninstall.packages(\"tidyverse\")",
+    "crumbs": [
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "01_introduction_to_r.html#set-up",
+    "href": "01_introduction_to_r.html#set-up",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "If you haven’t already, please install R and RStudio on your computer:\n\nFollow this link: https://posit.co/download/rstudio-desktop/\n\n\nInstall R\nInstall RStudio\n\n\n\n\n\nSetup RStudio-Desktop\n\n\n\n\n\n\nDownload the material for this session from the Actuarial University Dashboard using the course link below: https://www.actuarialuniversity.com/seminar/View/14826. You’ll find a Session1.zip file with all the necessary files. Make sure to unzip the file in a location you can easily access.\nOpen RStudio and install the necessary packages with the following command:\n\n\ninstall.packages(\"tidyverse\")",
+    "crumbs": [
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "01_introduction_to_r.html#introduction-to-r-programming-environment",
+    "href": "01_introduction_to_r.html#introduction-to-r-programming-environment",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Introduction to R Programming Environment",
+    "text": "Introduction to R Programming Environment\nR is a programming language and statistical development environment widely used for data analysis, visualization, and statistical modeling. It is an open-source language that provides a wide range of functions and packages specific to data processing and statistics.\nR is particularly popular among statisticians, data analysts, and data scientists due to its power and flexibility in data processing and analysis. It comes with numerous statistical functions, data manipulation capabilities, and visualization tools, making it a versatile tool for exploring and analyzing data.",
+    "crumbs": [
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "01_introduction_to_r.html#learning-objectives",
+    "href": "01_introduction_to_r.html#learning-objectives",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\nUnderstand the R environment, basic syntax, data structures\nLearn essential R functions covering the basics of various actuarial concepts\nManipulate and clean data using base R and the {tidyverse} framework\nPerform basic statistical analysis\nGain first level hands-on data visualization experience with {ggplot2}\n\nWith a good understanding of these concepts, you can start exploring advanced features of R based on your specific needs.",
+    "crumbs": [
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "01_introduction_to_r.html#resources",
+    "href": "01_introduction_to_r.html#resources",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Resources",
+    "text": "Resources\nIn case you get stuck or you just want to learn more about R, here are some resources to help you along the way:\n\nhelp.start()\n?syntax\n\n(hint. substitute syntax with your function)\nYou can open a help page for any object that comes with R or with an R package. To open the help page, type a ? before the object’s name and then run the command.\nMore Resources:\n\nBOOK: R for Data Science by Hadley Wickham and Garrett Grolemund. Available online at https://r4ds.had.co.nz/\nCRAN Task View: Actuarial Science: https://cran.r-project.org/web/views/ActuarialScience.html\nR/Insurance Series: For Everyone in Insurance or Actuarial Science: https://www.r-consortium.org/r-insurance-series-for-everyone-in-insurance-or-actuarial-science",
+    "crumbs": [
+      "Introduction to R"
+    ]
+  },
+  {
+    "objectID": "05_final_project.html",
+    "href": "05_final_project.html",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "In this project assignment, you will be working on a dataset from the Casualty Actuarial Society (CAS) website. The dataset contains information on the workers’ compensation insurance industry in the United States. The dataset includes data on premiums, losses, and expenses for various years.",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "05_final_project.html#introduction",
+    "href": "05_final_project.html#introduction",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "In this project assignment, you will be working on a dataset from the Casualty Actuarial Society (CAS) website. The dataset contains information on the workers’ compensation insurance industry in the United States. The dataset includes data on premiums, losses, and expenses for various years.",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "05_final_project.html#objective",
+    "href": "05_final_project.html#objective",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Objective",
+    "text": "Objective\nThe goal of this assignment is to analyze and model workers’ compensation claims data using the wkcomp_pos dataset. You will explore patterns in incurred and paid losses, understand how they develop over time, and build a predictive model for cumulative paid losses using regression techniques.",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "05_final_project.html#deliverables",
+    "href": "05_final_project.html#deliverables",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Deliverables",
+    "text": "Deliverables\n\nReport detailing:\n\n\nYour data exploration process and key insights.\nThe regression model and its interpretation.\nModel evaluation and assumptions check.\nOptional: comparison between the linear model and the advanced model (e.g., GAM).\n\n\nR Code used for the analysis, clearly documented and structured.",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "05_final_project.html#learning-outcomes",
+    "href": "05_final_project.html#learning-outcomes",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\n\nGain experience with real-world workers’ compensation data.\nDevelop proficiency in data manipulation and visualization using tidyverse.\nBuild and evaluate regression models for loss prediction.\nUnderstand the importance of model assumptions and how to check them visually.",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "05_final_project.html#tasks",
+    "href": "05_final_project.html#tasks",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Tasks",
+    "text": "Tasks\nThe project assignment is divided into four main tasks:\n\nData Exploration: Load the dataset, check for missing values, and visualize key relationships.\nModeling the Loss Development: Create a regression model to predict cumulative paid losses.\nModel Evaluation: Evaluate the model using metrics such as R-squared, RMSE, and AIC.\nAdvanced Modeling (Optional): Try an advanced model (e.g., GAM) and compare its performance to the linear model.",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "05_final_project.html#references",
+    "href": "05_final_project.html#references",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "References",
+    "text": "References\n\nCasualty Actuarial Society (CAS) Data\nR for Data Science\nR for Actuaries and Data Scientists with Application to Insurance\nStatistical Foundation of Actuarial Learning and Its Applications\n\n\nHappy learning! Good luck!",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html",
+    "href": "02_practice_with_r.html",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "Data manipulation is a fundamental skill in the field of data science. It involves the process of transforming, organizing, and cleaning raw data to make it suitable for analysis and visualization. R can be used in tasks such as determining premium rates for mortality and morbidity products, evaluating the probability of financial loss or return, providing business risk consulting, and planning for pensions and retirement. In essence, R is a powerful tool for actuaries and data scientists to perform complex data analysis and modeling.",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#base-functions",
+    "href": "02_practice_with_r.html#base-functions",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Base Functions",
+    "text": "Base Functions\nFor example, the mean() function calculates the average of a set of numbers. The mean() function takes a vector of numbers as input and returns the average of those numbers. To access a general function information in R, use the help() function, or the ? operator.\n\n?mean()\nhelp(mean)\n\nThe c() function is used to combine values into a vector or list.\n\nmean(c(1, 2, 3, 4, 5))\n\n[1] 3\n\n\nUseful base R function:\n\nmean() - calculates the average of a set of numbers\nsum() - calculates the sum of a set of numbers\nsd() - calculates the standard deviation of a set of numbers\nvar() - calculates the variance of a set of numbers\nmin() - returns the minimum value in a set of numbers\nmax() - returns the maximum value in a set of numbers\nlength() - returns the length of a vector\nstr() - displays the structure of an R object\nclass() - returns the class of an object\ntypeof() - returns the type of an object\nsummary() - provides a summary of an object\nplot() - creates a plot of data …",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#user-defined-functions",
+    "href": "02_practice_with_r.html#user-defined-functions",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "User-Defined Functions",
+    "text": "User-Defined Functions\n\nname &lt;- function(variables) {\n  # Code block\n}\n\n\nx &lt;- c(1, 2, 3, 4, 5)\n\navg &lt;- function(x) {\n  sum(x)/length(x)\n}\n\n\navg(x);\n\n[1] 3\n\nmean(x)\n\n[1] 3",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#inspecting-data",
+    "href": "02_practice_with_r.html#inspecting-data",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Inspecting Data",
+    "text": "Inspecting Data\nTo inspect data we can use functions such as str(), class(), or typeof(). The str() function provides a compact display of the internal structure of an R object. The class() function returns the class of the object. The typeof() function returns the type of the object. Another function that can be used to inspect data is glimpse() from the dplyr package.\n\nstr(claims)\n\n num [1:1000] 4217 2883 6645 158 281 ...\n\n\n\nclass(claims)\n\n[1] \"numeric\"\n\n\n\ntypeof(claims)\n\n[1] \"double\"\n\n\nThe claims data is a numeric vector.\nTo have a basic summary of the data, we can use the summary() function.\n\nsummary(claims)\n\n    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. \n    4.13  1533.46  3655.83  5149.90  7133.18 36055.04",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#data-visualization",
+    "href": "02_practice_with_r.html#data-visualization",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Data Visualization",
+    "text": "Data Visualization\nThere are a set of functions in base R for data visualization, such as plot(), hist(), and boxplot(), to create scatter plots, line plots, bar plots, histograms, and box plots.\nFor example, to make an histogram of the claims data, use the hist() function. The breaks argument specifies the number of intervals to divide the data into.\n\nhist(claims, breaks = 30)\n\n\n\n\n\n\n\n\nIn addition, for a more customized plot, we can use the ggplot2 package, part of the tidyverse set of packages. The ggplot() function initializes a plot, and the geom_&lt;&gt;() functions add layers to the plot, the layers are chained using the + operator. More information on ggplot2 can be found in the ggplot2: Elegant Graphics for Data Analysis book by Hadley Wickham.\nWe can produce the same histogram as before using ggplot2, but first we need to convert the claims vector to be a data frame.\n\nset.seed(1123)\nclaims_df &lt;- data.frame(claim_id = sample(x = 1:num_claims, \n                                          size = num_claims, \n                                          replace = FALSE),\n                        claim_amount = claims)\nhead(claims_df)\n\n  claim_id claim_amount\n1      624    4217.2863\n2      102    2883.0514\n3      427    6645.2743\n4      324     157.8868\n5      912     281.0549\n6      380    1582.5061\n\n\nTo create the histogram using ggplot2, we add the aesthetics of the plot using the aes() function, specify the x-axis and y-axis variables, and use the geom_histogram() function to create the histogram. The labs() function is used to add titles to the plot. There are other customizations that can be added to the plot, such as color, fill, and more.\n\nggplot(data = claims_df, \n       aes(x = claim_amount)) +\n  geom_histogram(bins = 30, fill = \"blue\", color = \"black\") +\n  labs(title = \"Simulated Claims Data\",\n       x = \"Claim Amount\",\n       y = \"Frequency\")",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#inspecting-data-1",
+    "href": "02_practice_with_r.html#inspecting-data-1",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Inspecting Data",
+    "text": "Inspecting Data\nThe freMTPLfreq dataset contains the risk features and the claim number, while the freMTPLsev dataset contains the claim amount and the corresponding policy ID.\nWe can use the glimpse() function from the dplyr package to get a quick overview of the datasets.\n\nglimpse(head(freMTPLfreq))\n\nRows: 6\nColumns: 10\n$ PolicyID  &lt;fct&gt; 1, 2, 3, 4, 5, 6\n$ ClaimNb   &lt;int&gt; 0, 0, 0, 0, 0, 0\n$ Exposure  &lt;dbl&gt; 0.09, 0.84, 0.52, 0.45, 0.15, 0.75\n$ Power     &lt;fct&gt; g, g, f, f, g, g\n$ CarAge    &lt;int&gt; 0, 0, 2, 2, 0, 0\n$ DriverAge &lt;int&gt; 46, 46, 38, 38, 41, 41\n$ Brand     &lt;fct&gt; \"Japanese (except Nissan) or Korean\", \"Japanese (except Niss…\n$ Gas       &lt;fct&gt; Diesel, Diesel, Regular, Regular, Diesel, Diesel\n$ Region    &lt;fct&gt; Aquitaine, Aquitaine, Nord-Pas-de-Calais, Nord-Pas-de-Calais…\n$ Density   &lt;int&gt; 76, 76, 3003, 3003, 60, 60\n\n\n\nglimpse(head(freMTPLsev))\n\nRows: 6\nColumns: 2\n$ PolicyID    &lt;int&gt; 63987, 310037, 314463, 318713, 309380, 309380\n$ ClaimAmount &lt;int&gt; 1172, 1905, 1150, 1220, 55077, 7593\n\n\nCheck if there are any missing values in the datasets using the any() function. The is.na() function checks for missing values in the dataset.\n\nany(is.na(freMTPLfreq));\n\n[1] FALSE\n\nany(is.na(freMTPLsev))\n\n[1] FALSE",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#data-preparation",
+    "href": "02_practice_with_r.html#data-preparation",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Data Preparation",
+    "text": "Data Preparation\nThe two datasets have a common variable, PolicyID, which can be used as a key to merge the datasets to create a single dataset that contains both the frequency and severity of claims.\nSomething to notice is that PolicyID is stored as a character variable in the freMTPLfreq dataset and as an integer variable in the freMTPLsev dataset. So, in order to proceed with merging the two sets, we need to transform the PolicyID variable in the freMTPLfreq dataset to an integer type.",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#mutate-and-merge-data",
+    "href": "02_practice_with_r.html#mutate-and-merge-data",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Mutate and Merge Data",
+    "text": "Mutate and Merge Data\nThe mutate() function is used to create a new variable, or to make a modification to an existing one, as in this case, to transform PolicyID as an integer type.\n\nfreMTPLfreq &lt;- freMTPLfreq %&gt;%\n  mutate(PolicyID = as.integer(PolicyID))\n\nWe could have done this with base R as well, using the as.integer() function.\n\nfreMTPLfreq$PolicyID &lt;- as.integer(freMTPLfreq$PolicyID)\n\nThe way to use the $ operator is to access a variable in a data frame. The class() function is used to check the class of the modified object.\n\nfreMTPLfreq$PolicyID %&gt;% class()\n\n[1] \"integer\"\n\n\nWe can now combine the two datasets using the merge() function from base R which merges two datasets based on a common variable, in this case, the PolicyID variable.\nThere are other functions that can be used to merge datasets, such as inner_join(), left_join(), right_join(), and full_join() from the dplyr package, depending on the desired output.\n\nclaims_data_raw &lt;- freMTPLfreq %&gt;%\n  merge(freMTPLsev, by = \"PolicyID\")\n\nclaims_data_raw %&gt;% dim()\n\n[1] 30 11\n\n\n\nclaims_data_raw %&gt;% names()\n\n [1] \"PolicyID\"    \"ClaimNb\"     \"Exposure\"    \"Power\"       \"CarAge\"     \n [6] \"DriverAge\"   \"Brand\"       \"Gas\"         \"Region\"      \"Density\"    \n[11] \"ClaimAmount\"\n\n\n\nclaims_data_raw %&gt;%\n  summary()\n\n    PolicyID        ClaimNb         Exposure          Power       CarAge      \n Min.   : 33.0   Min.   :1.000   Min.   :0.0100   g      :6   Min.   : 0.000  \n 1st Qu.:377.2   1st Qu.:1.000   1st Qu.:0.4775   i      :5   1st Qu.: 0.000  \n Median :497.0   Median :1.000   Median :0.6500   e      :4   Median : 0.000  \n Mean   :506.4   Mean   :1.267   Mean   :0.5507   j      :4   Mean   : 2.733  \n 3rd Qu.:703.0   3rd Qu.:1.750   3rd Qu.:0.7150   l      :4   3rd Qu.: 6.500  \n Max.   :956.0   Max.   :2.000   Max.   :0.9600   d      :3   Max.   :10.000  \n                                                  (Other):4                   \n   DriverAge                                    Brand         Gas    \n Min.   :22.00   Fiat                              : 0   Diesel : 5  \n 1st Qu.:38.25   Japanese (except Nissan) or Korean:27   Regular:25  \n Median :50.00   Mercedes, Chrysler or BMW         : 0               \n Mean   :47.97   Opel, General Motors or Ford      : 1               \n 3rd Qu.:51.00   other                             : 0               \n Max.   :78.00   Renault, Nissan or Citroen        : 2               \n                 Volkswagen, Audi, Skoda or Seat   : 0               \n                Region      Density       ClaimAmount    \n Ile-de-France     :21   Min.   :   23   Min.   :  73.0  \n Aquitaine         : 5   1st Qu.: 1724   1st Qu.: 580.5  \n Pays-de-la-Loire  : 2   Median : 3121   Median :1048.5  \n Basse-Normandie   : 1   Mean   : 9288   Mean   :1873.4  \n Nord-Pas-de-Calais: 1   3rd Qu.:16786   3rd Qu.:1446.8  \n Bretagne          : 0   Max.   :27000   Max.   :9924.0  \n (Other)           : 0",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#filter-and-summarize-data",
+    "href": "02_practice_with_r.html#filter-and-summarize-data",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Filter and Summarize Data",
+    "text": "Filter and Summarize Data\nWe can filter the data to include only claims greater than 1000 and summarize the total claims by year. The group_by() function is used to group the data by a specific variable, and the reframe() function is used to calculate summary statistics for each group.\n\n# Filter data for claims greater than 1000\nhigh_claims &lt;- claims_data_raw %&gt;% filter(ClaimAmount &gt; 1000)\n\n\nggplot(data = high_claims, \n       aes(x = factor(DriverAge), y = ClaimAmount)) +\n  geom_col() +\n  labs(title = \"High Claims by Driver Age\",\n       x = \"Driver Age\",\n       y = \"Claim Amount\")",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#grouping-and-summarize-total-claims-by-driverage",
+    "href": "02_practice_with_r.html#grouping-and-summarize-total-claims-by-driverage",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Grouping and Summarize total claims by DriverAge",
+    "text": "Grouping and Summarize total claims by DriverAge\n\nclaims_summary &lt;- claims_data_raw %&gt;%\n  group_by(DriverAge) %&gt;%\n  reframe(TotalClaims = sum(ClaimAmount))\n\nclaims_summary\n\n# A tibble: 19 × 2\n   DriverAge TotalClaims\n       &lt;int&gt;       &lt;int&gt;\n 1        22        3409\n 2        24        1418\n 3        27         508\n 4        28        1344\n 5        32         936\n 6        34        1390\n 7        35         747\n 8        36        1449\n 9        45        1274\n10        47        1584\n11        49        3532\n12        50        3909\n13        51       13868\n14        53        9105\n15        61         302\n16        68        1107\n17        71        6518\n18        74        3332\n19        78         471\n\n\n\nggplot(data = claims_summary, \n       aes(x = factor(DriverAge), y = TotalClaims)) +\n  # fix the bar plot\n  geom_col() +\n  labs(title = \"Total Claims by Driver Age\",\n       x = \"Driver Age\",\n       y = \"Claim Amount\")",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#premium-calculation",
+    "href": "02_practice_with_r.html#premium-calculation",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Premium Calculation",
+    "text": "Premium Calculation\nLet’s calculate the Premium formula for the claims data. The premium formula is given by:\n\\[Premium = \\frac{(\\text{projected claims} + \\text{fixed expenses)}}{(1-\\text{expenses as % of premium)}}\\] We calculate the projected claims as the product of the number of claims (ClaimNb) and the amount of claims (ClaimAmount). Then, we simulate fixed expenses as a random number between 100 and 500, and the expenses as a percentage of premium between 10% and 30%, with runif() functions.\n\n# Setting seed for reproducibility\nset.seed(42) \nclaims_data &lt;- claims_data_raw %&gt;%\n  mutate(\n    # Simulate projected claims between 1000 and 5000\n    projected_claims = ClaimNb * ClaimAmount,  \n    # Simulate fixed expenses between 100 and 500\n    fixed_expenses = runif(n(), 100, 500),      \n    # Simulate expenses percentage between 10% and 30%\n    expenses_as_percent_of_premium = runif(n(), 0.1, 0.3)\n    )\n\nWith the mutate() function we create the Premium variable using the formula provided. The dim() function is used to check the dimensions of the dataset.\n\n# Calculate Premium using the given formula\nclaims_data &lt;- claims_data %&gt;%\n  mutate(\n    Premium = (projected_claims + fixed_expenses) / (1 - expenses_as_percent_of_premium)\n  )\n\nclaims_data %&gt;% dim()\n\n[1] 30 15\n\n\nTo select specific columns from a dataset we can use the select() function from the dplyr package. Then, the head() function is used to display the first few rows of the dataset.\n\n# View the results\nclaims_data %&gt;%\n  select(PolicyID, \n         projected_claims, \n         fixed_expenses, \n         expenses_as_percent_of_premium,\n         Premium) %&gt;%\n  head()\n\n  PolicyID projected_claims fixed_expenses expenses_as_percent_of_premium\n1       33              302       465.9224                      0.2475191\n2       41             2001       474.8302                      0.2622110\n3       92             1449       214.4558                      0.1776217\n4       96             1892       432.1791                      0.2370339\n5       96            19848       356.6982                      0.1007897\n6      142             1390       307.6384                      0.2665832\n    Premium\n1  1020.521\n2  3355.743\n3  2022.738\n4  3046.242\n5 22469.380\n6  2314.698",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#visualize-projected-claims-vs-premium",
+    "href": "02_practice_with_r.html#visualize-projected-claims-vs-premium",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Visualize Projected Claims vs Premium",
+    "text": "Visualize Projected Claims vs Premium\n\nggplot(data = claims_data %&gt;% filter(Premium &lt; 10000), \n       aes(x = projected_claims, y = Premium)) +\n  # Add points\n  geom_point() +\n  # Add a smooth line\n  geom_smooth()+\n  labs(title = \"Projected Claims vs Premium\",\n       x = \"Projected Claims\",\n       y = \"Premium\")",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "02_practice_with_r.html#group-data-by-age-and-calculate-average-premium",
+    "href": "02_practice_with_r.html#group-data-by-age-and-calculate-average-premium",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Group Data by Age and Calculate Average Premium",
+    "text": "Group Data by Age and Calculate Average Premium\nLet’s check the range of the DriverAge variable and group the data by age to calculate the average premium for each age group.\n\nrange(claims_data$DriverAge)\n\n[1] 22 78\n\n\nFinally, we group the data by 5 years age group and calculate the average premium for each age group using the cut() function to create age groups.\n\nclaims_data %&gt;%\n  mutate(DriverAge_group = cut_interval(DriverAge, \n                                        n = 5)) %&gt;%\n  group_by(DriverAge_group) %&gt;%\n  reframe(avg_Premium = mean(Premium))\n\n# A tibble: 5 × 2\n  DriverAge_group avg_Premium\n  &lt;fct&gt;                 &lt;dbl&gt;\n1 [22,33.2]             2501.\n2 (33.2,44.4]           1796.\n3 (44.4,55.6]           4439.\n4 (55.6,66.8]           1021.\n5 (66.8,78]             4020.\n\n\n\nclaims_data_ag &lt;- claims_data %&gt;%\n  mutate(DriverAge_group = cut(DriverAge, \n                               breaks = c(18, 25, 35, \n                                          45, 55, 65, \n                                          75, 85, 95, 99),\n                               include.lowest = TRUE)) %&gt;% \n  arrange(DriverAge_group) %&gt;% \n  group_by(DriverAge_group) %&gt;%\n  reframe(avg_Premium = mean(Premium)) \n\nclaims_data_ag\n\n# A tibble: 7 × 2\n  DriverAge_group avg_Premium\n  &lt;fct&gt;                 &lt;dbl&gt;\n1 [18,25]               3750.\n2 (25,35]               1674.\n3 (35,45]               2119.\n4 (45,55]               4578.\n5 (55,65]               1021.\n6 (65,75]               5055.\n7 (75,85]                915.\n\n\n\nclaims_data_ag %&gt;%\n  ggplot(aes(x = DriverAge_group, y = avg_Premium)) +\n  geom_col(fill = \"blue\") +\n  labs(title = \"Average Premium by Age Group\",\n       x = \"Driver Age Group\",\n       y = \"Average Premium\")",
+    "crumbs": [
+      "Practice with R"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html",
+    "href": "04_practice_pm.html",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "Predictive modeling is a specific, technical step within the broader process of predictive analytics. It involves creating a mathematical or machine learning model that can forecast future outcomes based on historical data. A predictive model is a representation of the relationships between variables (features) and the outcome you’re trying to predict (target). Various algorithms can be used to build these models, such as linear regression, decision trees, or neural networks.\nIn actuarial science, predictive modeling is used to estimate future claims, analyze risk, and set insurance premiums. In this session, we will explore some practical examples of predictive modeling in actuarial contexts using R.",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#data-collection",
+    "href": "04_practice_pm.html#data-collection",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Data Collection",
+    "text": "Data Collection\nThe data is available in a .CSV file from the Casualty Actuarial Society (CAS) website. We will load the data into R for analysis. The data set contains run-off triangles. Upper and lower triangles data correspond to claims of accident year 1988 – 1997 with 10 years development lag.\n\n\n\n\n\n\nTip\n\n\n\nThe codebook for the data can be found at the following link: Loss Reserving Data Pulled from NAIC Schedule P\n\n\n\n# Load necessary libraries\nlibrary(tidyverse)\n\n\nurl &lt;- \"https://www.casact.org/sites/default/files/2021-04/medmal_pos.csv\"\ndf &lt;- read_csv(file = url)\n\n\n\n\n\n\n\nTip\n\n\n\nDownloaded data is now available in the Global Environment. It can be saved as a .CSV file for future use with the following code:\n\nwrite.csv(df, \"data/medmal_pos.csv\")\nmedmal_pos &lt;- read.csv(\"data/medmal_pos.csv\")",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#data-cleaning-and-preparation",
+    "href": "04_practice_pm.html#data-cleaning-and-preparation",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Data Cleaning and Preparation",
+    "text": "Data Cleaning and Preparation\n\ndim(df);\n\n[1] 3400   13\n\ndf %&gt;% head() %&gt;% glimpse()\n\nRows: 6\nColumns: 13\n$ GRCODE             &lt;dbl&gt; 669, 669, 669, 669, 669, 669\n$ GRNAME             &lt;chr&gt; \"Scpie Indemnity Co\", \"Scpie Indemnity Co\", \"Scpie …\n$ AccidentYear       &lt;dbl&gt; 1988, 1988, 1988, 1988, 1988, 1988\n$ DevelopmentYear    &lt;dbl&gt; 1988, 1989, 1990, 1991, 1992, 1993\n$ DevelopmentLag     &lt;dbl&gt; 1, 2, 3, 4, 5, 6\n$ IncurLoss_F2       &lt;dbl&gt; 121905, 112211, 103226, 99599, 96006, 90487\n$ CumPaidLoss_F2     &lt;dbl&gt; 2716, 24576, 43990, 59722, 71019, 76354\n$ BulkLoss_F2        &lt;dbl&gt; 97966, 64117, 39008, 20736, 13599, 10577\n$ EarnedPremDIR_F2   &lt;dbl&gt; 129104, 129104, 129104, 129104, 129104, 129104\n$ EarnedPremCeded_F2 &lt;dbl&gt; -6214, -6214, -6214, -6214, -6214, -6214\n$ EarnedPremNet_F2   &lt;dbl&gt; 135318, 135318, 135318, 135318, 135318, 135318\n$ Single             &lt;dbl&gt; 0, 0, 0, 0, 0, 0\n$ PostedReserve97_F2 &lt;dbl&gt; 344558, 344558, 344558, 344558, 344558, 344558\n\n\n\ndf %&gt;%\n  select(IncurLoss_F2, CumPaidLoss_F2, BulkLoss_F2, EarnedPremNet_F2) %&gt;%\n  summary()\n\n  IncurLoss_F2    CumPaidLoss_F2    BulkLoss_F2       EarnedPremNet_F2\n Min.   :   -17   Min.   : -1190   Min.   :-32101.0   Min.   :  -728  \n 1st Qu.:     0   1st Qu.:     0   1st Qu.:     0.0   1st Qu.:     0  \n Median :   645   Median :   187   Median :     0.0   Median :  1302  \n Mean   : 11609   Mean   :  6706   Mean   :  1095.8   Mean   : 12308  \n 3rd Qu.:  9050   3rd Qu.:  4386   3rd Qu.:   107.2   3rd Qu.: 13490  \n Max.   :179425   Max.   :113189   Max.   :104402.0   Max.   :135318  \n\n\nWe can use the summary() function to get a quick overview of the data, including the mean, median, minimum, and maximum values for each variable, or the count() function to count the number of observations in the data.\n\ndf %&gt;%\n  select(DevelopmentLag) %&gt;%\n  summary()\n\n DevelopmentLag\n Min.   : 1.0  \n 1st Qu.: 3.0  \n Median : 5.5  \n Mean   : 5.5  \n 3rd Qu.: 8.0  \n Max.   :10.0  \n\n\nThen we create a tailored dataset containing only the claims with a development lag of 5 years or more:\n\nlag5plus &lt;- df %&gt;%\n  filter(DevelopmentLag &gt;= 5) %&gt;%\n  select(GRNAME, AccidentYear, IncurLoss_F2, \n         CumPaidLoss_F2, EarnedPremNet_F2, DevelopmentLag) %&gt;%\n  rename(IncurLoss = IncurLoss_F2,\n         CumPaidLoss = CumPaidLoss_F2,\n         EarnedPremNet = EarnedPremNet_F2) %&gt;%\n  # the model will treat each year as an independent category.\n  mutate(AccidentYear = as.factor(AccidentYear))\n\n\nlag5plus %&gt;%\n  summary()\n\n    GRNAME           AccidentYear   IncurLoss       CumPaidLoss    \n Length:2040        1988   :204   Min.   :   -17   Min.   :   -23  \n Class :character   1989   :204   1st Qu.:     0   1st Qu.:     0  \n Mode  :character   1990   :204   Median :   579   Median :   464  \n                    1991   :204   Mean   : 10497   Mean   :  8842  \n                    1992   :204   3rd Qu.:  8144   3rd Qu.:  6899  \n                    1993   :204   Max.   :146354   Max.   :113189  \n                    (Other):816                                    \n EarnedPremNet    DevelopmentLag\n Min.   :  -728   Min.   : 5.0  \n 1st Qu.:     0   1st Qu.: 6.0  \n Median :  1302   Median : 7.5  \n Mean   : 12308   Mean   : 7.5  \n 3rd Qu.: 13490   3rd Qu.: 9.0  \n Max.   :135318   Max.   :10.0  \n                                \n\n\n\ntop_5GR &lt;- lag5plus %&gt;%\n  group_by(GRNAME) %&gt;%\n  summarize(mean_IncurLoss = mean(IncurLoss),\n            mean_CumPaidLoss = mean(CumPaidLoss),\n            mean_diff = mean_IncurLoss - mean_CumPaidLoss) %&gt;%\n  arrange(desc(mean_CumPaidLoss)) %&gt;%\n  slice_head(n = 5)\n\ntop_5GR\n\n# A tibble: 5 × 4\n  GRNAME                     mean_IncurLoss mean_CumPaidLoss mean_diff\n  &lt;chr&gt;                               &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;\n1 Scpie Indemnity Co                 90386.           85972.     4414.\n2 Physicians Recip Insurers         103508.           74228.    29280.\n3 State Volunteer Mut Ins Co         42873.           34267.     8606.\n4 Promutual Grp                      30437.           27381.     3055.\n5 Markel Corp Grp                    14647.           13915.      732.",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#exploratory-data-analysis-eda",
+    "href": "04_practice_pm.html#exploratory-data-analysis-eda",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Exploratory Data Analysis (EDA)",
+    "text": "Exploratory Data Analysis (EDA)\nWe create a scatterplot for representing the relationship between IncurLoss and CumPaidLoss for both, the entire dataset and for claims with a development lag of 5 years or more:\n# Plot 1\nggplot(df, \n       aes(x = IncurLoss_F2, y = CumPaidLoss_F2)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"red\") +\n  labs(title = \"Cumulative Paid Loss vs. Incurred Loss\", \n       x = \"Incurred Loss\", y = \"Cumulative Paid Loss\") \n# Plot2  \n# Claims with a development lag of 5 years or more\nggplot(lag5plus, aes(x = IncurLoss, y = CumPaidLoss)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", color = \"red\") +\n  labs(title = \"Cumulative Paid Loss vs. Incurred Loss\", \n       subtitle = \"Development Lag &gt;= 5\",\n       x = \"Incurred Loss\", y = \"Cumulative Paid Loss\") \n\n\n\n\n\n\n\n\n\n\nWe can see how the spread of the data points changes when we filter the data for claims with a development lag of 5 years or more. The linear relationship between IncurLoss and CumPaidLoss is more evident in the filtered data.",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#model-selection",
+    "href": "04_practice_pm.html#model-selection",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Model Selection",
+    "text": "Model Selection\nAs the relationship between Cumulative Paid Loss and Incurred Loss is linear, we can use a linear regression model to predict Cumulative Paid Loss based on Incurred Loss, Earned Premium, Accident Year, and Development Lag.\n\nLinear Regression Modeling\nThe linear regression model is a statistical method used to model the relationship between a dependent variable and one or more independent variables. The model assumes a linear relationship between the variables and can be represented as follows:\n\n\n\n\nACTEX Learning: Linear Regression Model\n\n\n\n\\[Y = \\beta_0 + \\beta_1 X + \\epsilon\\]\nWhere, \\(Y\\) is the dependent variable, \\(X\\) is the independent variable.\n\\(\\beta_0\\) is the intercept of the line, representing the baseline number of lives when age is zero, and can be calculated as follows:\n\\[\\beta_0 = \\bar{Y} - \\beta_1 \\bar{X}\\]\n\\(\\beta_1\\) is the coefficient of the model, and can be calculated as follows:\n\\[\\beta_1 = \\frac{Cov(X,Y)}{Var(X)} = \\frac{\\sum_{i=1}^{n}(X_i - \\bar{X})(Y_i - \\bar{Y})}{\\sum_{i=1}^{n}(X_i - \\bar{X})^2}\\]\n\n\n\n\n\n\nTip\n\n\n\nIn R we can calculate the coefficients of the model using the specific model function, such as lm(), or glm(). The slope (\\(\\beta_i\\)) and intercept (\\(\\beta_0\\)) can be retrieved from the model summary.\nTo calculate them directly, we can use the following code:\n\nslope &lt;- cov(x, y) / var(x)\nintercept &lt;- mean(y) - slope * mean(x)\ny_hat &lt;- intercept + slope * x\ny_hat_dist &lt;- abs(y - y_hat)\n\n\n\nThe objective is to minimize the sum of squared errors (SSE) between the predicted values and the actual values.\n\\[SSE = \\sum_{i=1}^{n}(Y_i - \\hat{Y_i})^2\\] Evaluating the model with the following metrics:\n\nR-squared: The proportion of the variance in the dependent variable that is predictable from the independent variable(s). \\[R^2 = 1 - \\frac{SSE}{SST}\\]\nMean Absolute Error (MAE): The average of the absolute differences between predicted and actual values. \\[MAE = \\frac{1}{n} \\sum_{i=1}^{n}|Y_i - \\hat{Y_i}|\\]\nMean Squared Error (MSE): The average of the squared differences between predicted and actual values. \\[MSE = \\frac{1}{n} \\sum_{i=1}^{n}(Y_i - \\hat{Y_i})^2\\]\nRoot Mean Squared Error (RMSE): The square root of the average of the squared differences between predicted and actual values. \\[RMSE = \\sqrt{MSE}\\]",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#model-training",
+    "href": "04_practice_pm.html#model-training",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Model Training",
+    "text": "Model Training\nWe will create a training and a test dataset to train the model and evaluate its performance.\n\n# Split the data into training and test sets\nset.seed(123)\ntrain_index &lt;- sample(1:nrow(lag5plus), \n                      0.8 * nrow(lag5plus),\n                      replace = FALSE)\ntrain_data &lt;- lag5plus[train_index, ]\ntest_data &lt;- lag5plus[-train_index, ]\n\nThe train_data will be used to fit the model, while the test_data will be used to evaluate the model’s performance.\nFitting a regression line model with only one predictor\nWe use the lm() function to fit a linear regression model with the CumPaidLoss as the dependent variable and IncurLoss as the predictor variable. The formula for the model is CumPaidLoss ~ IncurLoss.\n\n# Fit a linear regression model\nmodel1 &lt;- lm(formula = CumPaidLoss ~ IncurLoss, \n             data = train_data)\n\n# View the model summary\nsummary(model1)\n\n\nCall:\nlm(formula = CumPaidLoss ~ IncurLoss, data = train_data)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-54129   -312   -312    169  18408 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 3.117e+02  1.298e+02   2.401   0.0165 *  \nIncurLoss   8.100e-01  4.911e-03 164.956   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4811 on 1630 degrees of freedom\nMultiple R-squared:  0.9435,    Adjusted R-squared:  0.9434 \nF-statistic: 2.721e+04 on 1 and 1630 DF,  p-value: &lt; 2.2e-16\n\n\n\nThe output of the linear regression model provides information about the coefficients of the model, their significance, and the overall fit of the model to the data.\nIn this case we used a simple regression model with one predictor (IncurLoss) to predict the CumPaidLoss. The coefficients of the model represent the relationship between the predictor variable and the outcome variable.\nThe results show, the coefficient for IncurLoss is 8.100e-01 and indicates that for each unit increase in IncurLoss, the CumPaidLoss is expected to increase by 8.100e-01 units.\n\n\n\n\n\n\nTip\n\n\n\n\n# Define the number\nnum &lt;- 8.100e-01\nnum\n\n[1] 0.81\n\n# Force the display of the number in scientific notation\nformat(num, scientific = TRUE)\n\n[1] \"8.1e-01\"\n\n# Force the display of the number without scientific notation\nformat(num, scientific = FALSE)\n\n[1] \"0.81\"\n\n\n\n\nThe p-value associated with the coefficient is less than 0.05, indicating that the coefficient is statistically significant in predicting the outcome.\nThe R-squared value measures how well the model explains the variance in the data, with higher values indicating a better fit. In this case it explains ~94% of the variance in the data.\nWe have used only one predictor variable in this model, but you can include additional variables like EarnedPremNet, AccidentYear, and DevelopmentLag to build a more complex model.\nFitting a multiple regression model:\n\\[y = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + ... + \\beta_n x_n + \\epsilon\\]\n\n# Fit a multiple linear regression model\nmodel2 &lt;- lm(CumPaidLoss ~ IncurLoss + EarnedPremNet + AccidentYear + DevelopmentLag, \n             data = train_data)\n# View the model summary\nsummary(model2)\n\n\nCall:\nlm(formula = CumPaidLoss ~ IncurLoss + EarnedPremNet + AccidentYear + \n    DevelopmentLag, data = train_data)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-39813  -1131     88   1182  20446 \n\nCoefficients:\n                   Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)      -5.925e+03  5.515e+02 -10.745  &lt; 2e-16 ***\nIncurLoss         4.652e-01  1.680e-02  27.694  &lt; 2e-16 ***\nEarnedPremNet     3.431e-01  1.621e-02  21.164  &lt; 2e-16 ***\nAccidentYear1989  2.945e+02  4.540e+02   0.649  0.51664    \nAccidentYear1990  3.961e+02  4.635e+02   0.855  0.39295    \nAccidentYear1991  1.461e+03  4.590e+02   3.182  0.00149 ** \nAccidentYear1992  1.411e+03  4.574e+02   3.085  0.00207 ** \nAccidentYear1993  2.124e+03  4.660e+02   4.559 5.54e-06 ***\nAccidentYear1994  2.306e+03  4.601e+02   5.013 5.95e-07 ***\nAccidentYear1995  2.235e+03  4.576e+02   4.885 1.14e-06 ***\nAccidentYear1996  2.063e+03  4.550e+02   4.534 6.22e-06 ***\nAccidentYear1997  2.878e+03  4.586e+02   6.275 4.47e-10 ***\nDevelopmentLag    5.472e+02  6.001e+01   9.117  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4128 on 1619 degrees of freedom\nMultiple R-squared:  0.9587,    Adjusted R-squared:  0.9584 \nF-statistic:  3130 on 12 and 1619 DF,  p-value: &lt; 2.2e-16\n\n\n\nThe results of the multiple linear regression model provide information about the coefficients of the model for each predictor variable, their significance, and the overall fit of the model to the data.\nThe coefficients for the predictor variables indicate how they influence the predicted CumPaidLoss. All coefficients are positives and statistically significant, this means that all predictor variables have a positive impact on the CumPaidLoss.",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#models-evaluation",
+    "href": "04_practice_pm.html#models-evaluation",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Models Evaluation",
+    "text": "Models Evaluation\n\nANOVA Test\n\nanova(model1, model2)\n\nAnalysis of Variance Table\n\nModel 1: CumPaidLoss ~ IncurLoss\nModel 2: CumPaidLoss ~ IncurLoss + EarnedPremNet + AccidentYear + DevelopmentLag\n  Res.Df        RSS Df  Sum of Sq      F    Pr(&gt;F)    \n1   1630 3.7728e+10                                   \n2   1619 2.7586e+10 11 1.0142e+10 54.113 &lt; 2.2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe ANOVA test compares the two models to determine if the additional predictor variables in model 2 significantly improve the model fit compared to model 1.\nIn this test the null hypothesis is that the two models are equal, and the alternative hypothesis is that the two models are different.\nA p-value less than 0.05 indicates that model 2 is a better fit for the data than model 1.\n\n\nR-squared\n\n# Calculate the R-squared \nsummary(model1)$r.squared;\n\n[1] 0.943482\n\nsummary(model2)$r.squared\n\n[1] 0.9586755\n\n\nThe R-squared value measures how well the model explains the variance in the data, with higher values indicating a better fit. In this case, model 2 has a higher R-squared value than model 1, indicating that it explains more of the variance in the data.\n\n\nMean Squared Error (MSE)\n\n# Mean Squared Error (MSE)\nmean(model1$residuals^2)\n\n[1] 23117737\n\nmean(model2$residuals^2)\n\n[1] 16903090\n\n\nMean Squared Error (MSE) is a measure of the model’s accuracy, with lower values indicating a better fit to the data. The model with the lower MSE is considered more accurate in predicting the outcome.\nModel 1 and model 2 released a MSE of 23117737 and 16903090, respectively, which means that model 2 is more accurate in predicting the CumPaidLoss. And in terms of units, the MSE is in squared currency units. And so, ($)16903090 is the average squared error in predicting the CumPaidLoss. So, we can commit an error of ($)16903090 in our predictions.\n\n\nRoot Mean Squared Error (RMSE)\n\nsqrt(mean(model1$residuals^2));\n\n[1] 4808.091\n\nsqrt(mean(model2$residuals^2))\n\n[1] 4111.337\n\n\nThe Root Mean Squared Error (RSME) is a measure of the model’s accuracy, and the closer it is to zero, the better the model fits the data, with lower values indicating a better fit to the data. The RMSE is in the same units as the dependent variable (CumPaidLoss).\nAn RMSE value of ($)4,111.337 represents the average deviation of the predicted values from the actual values in the same units as the dependent variable.",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#predicting-cumulative-paid-loss",
+    "href": "04_practice_pm.html#predicting-cumulative-paid-loss",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Predicting Cumulative Paid Loss",
+    "text": "Predicting Cumulative Paid Loss\nBased on the metric results from both models, we select model2 to estimate the CumPaidLoss values on different data than the training set used to fit the model.\nPrediction generally refers to estimating an outcome based on known input variables. The goal is to predict outcomes for new observations within the range of the data used to train the model. In prediction, you’re often working with data that is either currently available or similar to what you’ve already observed. The prediction is based on patterns learned from historical data.\nTo test the predictions capability of model2, we use the predict() function on the test_data as follows:\n\n# Predict the cumulative paid loss for the test data\npredictions_test &lt;- predict(model2, test_data)\n\nThen, we can visualize the actual vs. predicted values using a scatter plot:\n\n# Plot actual vs. predicted values\nggplot(test_data, \n       aes(x = CumPaidLoss, y = predictions_test)) +\n  geom_point() +\n  geom_abline(slope = 1, intercept = 0, color = \"red\") +\n  labs(title = \"Actual vs. Predicted Cumulative Paid Loss\", \n       x = \"Actual\", y = \"Predicted\")\n\n\n\n\n\n\n\n\nWe can also use the model to estimate the CumPaidLoss for new data points. For example, we can create a new dataset with specific values for the predictor variables and use the models to predict the CumPaidLoss.\n\n# Create a new dataset for predictions (optional)\nnew_data &lt;- data.frame(\n  AccidentYear = factor(1995),\n  DevelopmentLag = 5,\n  IncurLoss = 100000,\n  EarnedPremNet = 150000\n)\n\n# Predict the cumulative paid loss for new data\npredictions &lt;- predict(model2, new_data)\npredictions\n\n       1 \n97030.53 \n\n\nVisualize the predicted value on observed data:\n\nggplot(lag5plus, \n       aes(x = IncurLoss, y = CumPaidLoss)) +\n  geom_point(size = 0.5) +\n  geom_point(x = new_data$IncurLoss, y = predictions, color = \"red\") +\n  geom_smooth(method = \"lm\",\n              linewidth = 0.5,\n              se = FALSE) +\n  labs(title = \"Predicting Cumulative Paid Loss\", \nx = \"Incurred Loss\", y = \"Cumulative Paid Loss\")",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#data-collection-1",
+    "href": "04_practice_pm.html#data-collection-1",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Data Collection",
+    "text": "Data Collection\n\nload(\"data/demo_data.RData\")",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#data-cleaning-and-preparation-1",
+    "href": "04_practice_pm.html#data-cleaning-and-preparation-1",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Data Cleaning and Preparation",
+    "text": "Data Cleaning and Preparation\n\nraw_Germany &lt;- demoGermany\n\nhead(raw_Germany)\n\n  x   qxMale qxFemale\n1 0 0.000113  5.9e-05\n2 1 0.000113  5.9e-05\n3 2 0.000113  5.9e-05\n4 3 0.000113  5.9e-05\n5 4 0.000113  5.9e-05\n6 5 0.000113  5.9e-05\n\n\n\nlivesGermany &lt;- raw_Germany %&gt;%\n  rename(age = x) %&gt;%\n  select(age, qx = qxMale) %&gt;%\n  mutate(px = 1 - qx,\n         lives = c(1, head(lead(px), -1)),\n         lives = as.integer(100e3*cumprod(lives))) %&gt;%\n  select(age, lives)\n\nhead(livesGermany)\n\n  age  lives\n1   0 100000\n2   1  99988\n3   2  99977\n4   3  99966\n5   4  99954\n6   5  99943\n\n\n\nraw_France &lt;- demoFrance\n\nhead(raw_France)\n\n  age TH00_02 TF00_02 TD88_90 TV88_90\n1   0  100000  100000  100000  100000\n2   1   99511   99616   99129   99352\n3   2   99473   99583   99057   99294\n4   3   99446   99562   99010   99261\n5   4   99424   99545   98977   99236\n6   5   99406   99531   98948   99214\n\n\n\nlivesFrance &lt;- raw_France %&gt;%\n  select(age, lives = TH00_02)\n\nhead(livesFrance)\n\n  age  lives\n1   0 100000\n2   1  99511\n3   2  99473\n4   3  99446\n5   4  99424\n6   5  99406",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#data-merging-and-transformation",
+    "href": "04_practice_pm.html#data-merging-and-transformation",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Data Merging and Transformation",
+    "text": "Data Merging and Transformation\n\ntbl_mortality &lt;- livesFrance %&gt;%\n  rename(France = lives) %&gt;%\n  full_join(livesGermany %&gt;%\n              rename(Germany = lives), by = \"age\") %&gt;%\n  pivot_longer(cols = c(\"France\",\"Germany\"), \n               names_to = \"Country\", \n               values_to = \"Lives\") %&gt;%\n  filter(!is.na(Lives))\n\nhead(tbl_mortality)\n\n# A tibble: 6 × 3\n    age Country  Lives\n  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;\n1     0 France  100000\n2     0 Germany 100000\n3     1 France   99511\n4     1 Germany  99988\n5     2 France   99473\n6     2 Germany  99977\n\n\nWe can also calculate the mean and standard deviation of the age and lives by country using the dplyr package:\n\ntbl_mortality %&gt;%\n  group_by(Country) %&gt;%\n  summarize(mean_age = mean(age),\n            mean_lives = mean(Lives),\n            sd_age = sd(age),\n            sd_lives = sd(Lives))\n\n# A tibble: 2 × 5\n  Country mean_age mean_lives sd_age sd_lives\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;\n1 France      56       67263.   32.8   38271.\n2 Germany     55.5     73888.   32.5   34915.\n\n\nAnd the mean of the numeric variables in the dataset:\n\ntbl_mortality %&gt;%\n  select(where(is.numeric)) %&gt;%\n  map_dbl(mean)\n\n        age       Lives \n   55.75111 70561.13778",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#exploratory-data-analysis-eda-1",
+    "href": "04_practice_pm.html#exploratory-data-analysis-eda-1",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Exploratory Data Analysis (EDA)",
+    "text": "Exploratory Data Analysis (EDA)\n\nggplot(tbl_mortality, \n       aes(x = age, y = Lives, color = Country)) +\n  geom_line() +\n  labs(title = \"Lives by Age and Country\", \n       x = \"Age\", y = \"Lives\")",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#model-selection-1",
+    "href": "04_practice_pm.html#model-selection-1",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Model Selection",
+    "text": "Model Selection\nVisualize the relationship between age and lives by country:\n\nggplot(tbl_mortality, \n       aes(x = age, y = Lives)) +\n  geom_line(aes(linetype = Country)) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"blue\") +\n  geom_smooth(method = \"gam\", se = FALSE, color = \"green\") +\n  labs(title = \"Lives by Age and Country\", \n       x = \"Age\", y = \"Lives\",\n       caption = \"Linear (blue) vs. GAM Model (green)\")\n\n\n\n\n\n\n\n\n\nGeneralized Additive Models (GAMs)\nThe model that would best fit the data is a Generalized Additive Model (GAM), it allows for non-linear relationships between the predictors and the response variable. The GAM model can capture more complex patterns in the data compared to a linear model.\nTo fit a GAM model, we can use the glm() function with the family = gaussian() argument to specify the Gaussian distribution for the response variable. The glm() function allows us to fit a variety of models, including linear regression, logistic regression, and generalized linear models (GLMs).\nThe formula for GAMs model is:\n\\[Y = \\beta_0 + \\beta_1 f(X_1) + \\epsilon\\]\nWhere, \\(Y\\) is the dependent variable, \\(f(X_1)\\) is a smooth function of the predictor variable, and \\(\\epsilon\\) is the error term.\nThe residuals can follow different distributions depending on the type of model. In this case, we assume that the residuals follow a Gaussian distribution: \\(\\epsilon \\sim N(0, \\sigma^2)\\)\n\\[\\epsilon = Y - \\hat{Y}\\]\nLet’s construct a GAM model to predict the number of lives based on age and country, using the poly() function to include a polynomial term for age:\n\\[Y = \\beta_0 + \\beta_1 X^2 + \\beta_2 X + \\epsilon\\]",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#model-training-1",
+    "href": "04_practice_pm.html#model-training-1",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Model Training",
+    "text": "Model Training\n\n# Split the data into training and test sets\nset.seed(123)\ntrain_index &lt;- sample(1:nrow(tbl_mortality), \n                      0.8 * nrow(tbl_mortality),\n                      replace = FALSE)\ntrain_data &lt;- tbl_mortality[train_index, ]\ntest_data &lt;- tbl_mortality[-train_index, ]\n\n\ngam_model &lt;- glm(formula = Lives ~ poly(age, 2) + Country, \n                 data = train_data)\n  \nsummary(gam_model)  \n\n\nCall:\nglm(formula = Lives ~ poly(age, 2) + Country, data = train_data)\n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)      69372.9      717.8  96.652  &lt; 2e-16 ***\npoly(age, 2)1  -434010.8     6888.6 -63.004  &lt; 2e-16 ***\npoly(age, 2)2  -203229.3     6880.5 -29.537  &lt; 2e-16 ***\nCountryGermany    5455.4     1027.1   5.311 3.26e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 47341820)\n\n    Null deviance: 2.4087e+11  on 179  degrees of freedom\nResidual deviance: 8.3322e+09  on 176  degrees of freedom\nAIC: 3697.9\n\nNumber of Fisher Scoring iterations: 2\n\n\n\nLooking at the meaning of the model output, the coefficients represent the expected count of lives. The coefficient for Germany (5455.4) indicates that the expected count of lives in Germany is higher than in France, after controlling for age.\npoly(age, 2) coefficients results are negatives, which means that the expected count of lives decreases with age, but the rate of decrease slows down as age increases.",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#models-evaluation-1",
+    "href": "04_practice_pm.html#models-evaluation-1",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Models Evaluation",
+    "text": "Models Evaluation\n\nAkaike Information Criterion (AIC)\nThe Akaike Information Criterion (AIC) is a measure of the model’s goodness of fit, balancing the trade-off between model complexity and accuracy. Lower AIC values indicate a better fit to the data.\n\\[AIC = 2k - 2ln(L)\\]\nWhere, \\(k\\) is the number of parameters in the model, and \\(L\\) is the likelihood of the model given the data.\n\\[L = \\prod_{i=1}^{n} f(y_i | x_i)\\] In this case \\(f(y_i | x_i)\\) is the probability density function of the Gaussian distribution.\n\nAIC(gam_model)\n\n[1] 3697.896\n\n\nWhen comparing the AIC values of the linear model and the GAM model, the GAM model has a lower AIC value, indicating a better fit to the data.",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "04_practice_pm.html#making-predictions",
+    "href": "04_practice_pm.html#making-predictions",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Making Predictions",
+    "text": "Making Predictions\nHere we test the predictions of the GLM and GAM models:\n\n# Make predictions with the GLM model\ngam_predictions_test &lt;- predict(gam_model, \n                                test_data, \n                                type = \"response\")\n\n\ncbind(test_data, gam_predictions_test) %&gt;%\n  ggplot(aes(x = age, y = Lives, group = Country)) +\n  geom_point(size = 0.5) +\n  geom_line(aes(y = gam_predictions_test, color = Country)) +\n  facet_wrap(~Country) +\n  labs(title = \"Predicting Lives by Age and Country\", \n       x = \"Age\", y = \"Lives\")\n\n\n\n\n\n\n\n\n\n# Create a new data frame for predictions\nnew_data &lt;- data.frame(age = 55, Country = \"Germany\")\n\n\n# Make predictions with the GLM model\ngam_predictions &lt;- predict(gam_model, \n                           new_data, \n                           type = \"response\")\ngam_predictions\n\n      1 \n90916.2 \n\n\n\n# Plot the model\nggplot(tbl_mortality, \n       aes(x = age, y = Lives)) +\n  geom_line(aes(linetype = Country), size = 0.5) +\n  geom_smooth(method = \"gam\",\n              linewidth = 0.5,\n              se = FALSE) +\n  geom_point(x = 55, y = gam_predictions, color = \"red\") +\nlabs(title = \"Predicting Lives by Age and Country\", \n     x = \"Age\", y = \"Lives Remaining\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTo further understand how the model works, you can explore the predict() function with the ?predict() command in R.\n\n?predict()",
+    "crumbs": [
+      "Practice Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "03_introduction_to_pm.html",
+    "href": "03_introduction_to_pm.html",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "If you haven’t already, please download the material for this session from the Actuarial University Dashboard using the course link below: https://www.actuarialuniversity.com/seminar/View/14826. You’ll find a Session2.zip file with all the necessary files. Make sure to unzip it in the same location of Session1.zip.",
+    "crumbs": [
+      "Introduction to Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "03_introduction_to_pm.html#set-up",
+    "href": "03_introduction_to_pm.html#set-up",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "",
+    "text": "If you haven’t already, please download the material for this session from the Actuarial University Dashboard using the course link below: https://www.actuarialuniversity.com/seminar/View/14826. You’ll find a Session2.zip file with all the necessary files. Make sure to unzip it in the same location of Session1.zip.",
+    "crumbs": [
+      "Introduction to Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "03_introduction_to_pm.html#introduction-to-predictive-modeling",
+    "href": "03_introduction_to_pm.html#introduction-to-predictive-modeling",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Introduction to Predictive Modeling",
+    "text": "Introduction to Predictive Modeling\nIn the first session of this course, we learned about the basics of R and how to perform basic data analysis. In this session, we will delve deeper into predictive modeling and practice using R functions in various actuarial contexts. We will also learn how to manage CSV files, explore R packages for data analysis, and apply our knowledge to a practical project.",
+    "crumbs": [
+      "Introduction to Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "03_introduction_to_pm.html#learning-objectives",
+    "href": "03_introduction_to_pm.html#learning-objectives",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\nUtilize statistical modeling and simulation techniques\nMake R functions to use in various actuarial contests\nPractice managing csv files\nLearn about R packages for data analysis\nApply learned R functions and concepts to a practical project\n\nR is particularly suited for predictive modeling in actuarial work because it supports complex statistical analysis, has a vast collection of libraries (glm, rpart, randomForest, survival), and offers extensive visualization tools to communicate results effectively. Traditional statistical methods (like GLMs) and modern machine learning techniques (like Gradient Boosted Trees - GBMs and decision trees), can be implemented all within the same environment.\n\nExamples\n\nBuilding a linear regression model to predict a company’s sales based on advertising spend.\nUsing a decision tree to classify whether a customer will churn based on demographic and behavioral data.",
+    "crumbs": [
+      "Introduction to Predictive Modeling"
+    ]
+  },
+  {
+    "objectID": "03_introduction_to_pm.html#resources",
+    "href": "03_introduction_to_pm.html#resources",
+    "title": "Introduction to R and Basic Data Analysis",
+    "section": "Resources",
+    "text": "Resources\n\nApplied Predictive Modeling by Max Kuhn and Kjell Johnson\nAn Introduction to Statistical Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani\nGeneralized Additive Models: An Introduction with R by Simon N. Wood",
+    "crumbs": [
+      "Introduction to Predictive Modeling"
+    ]
+  }
+]

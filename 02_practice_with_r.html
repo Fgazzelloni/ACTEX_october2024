@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Federica Gazzelloni and Farid Flici">
+<meta name="dcterms.date" content="2024-10-03">
+
+<title>Introduction to R and Basic Data Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03_introduction_to_pm.html" rel="next">
+<link href="./01_introduction_to_r.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-7cd6aa0516822edc0d2f37b380b7be78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_practice_with_r.html">Practice with R</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/actex_logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/actex_logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_introduction_to_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_practice_with_r.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Practice with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_introduction_to_pm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Predictive Modeling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_practice_pm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Predictive Modeling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_final_project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Project</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-into-practice-with-r" id="toc-getting-into-practice-with-r" class="nav-link active" data-scroll-target="#getting-into-practice-with-r">Getting into Practice with R</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">Data Types</a></li>
+  <li><a href="#basic-r-syntax" id="toc-basic-r-syntax" class="nav-link" data-scroll-target="#basic-r-syntax">Basic R Syntax</a></li>
+  <li><a href="#r-functions" id="toc-r-functions" class="nav-link" data-scroll-target="#r-functions">R Functions</a>
+  <ul class="collapse">
+  <li><a href="#base-functions" id="toc-base-functions" class="nav-link" data-scroll-target="#base-functions">Base Functions</a></li>
+  <li><a href="#user-defined-functions" id="toc-user-defined-functions" class="nav-link" data-scroll-target="#user-defined-functions">User-Defined Functions</a></li>
+  </ul></li>
+  <li><a href="#essential-data-preparation-techniques-wrangling-manipulation-and-transformation" id="toc-essential-data-preparation-techniques-wrangling-manipulation-and-transformation" class="nav-link" data-scroll-target="#essential-data-preparation-techniques-wrangling-manipulation-and-transformation">Essential Data Preparation Techniques: Wrangling, Manipulation, and Transformation</a></li>
+  <li><a href="#example-1-simulate-claims-data" id="toc-example-1-simulate-claims-data" class="nav-link" data-scroll-target="#example-1-simulate-claims-data">Example 1: Simulate Claims Data</a>
+  <ul class="collapse">
+  <li><a href="#inspecting-data" id="toc-inspecting-data" class="nav-link" data-scroll-target="#inspecting-data">Inspecting Data</a></li>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a></li>
+  </ul></li>
+  <li><a href="#example-2-motor-insurance-claims-data" id="toc-example-2-motor-insurance-claims-data" class="nav-link" data-scroll-target="#example-2-motor-insurance-claims-data">Example 2: Motor Insurance Claims Data</a>
+  <ul class="collapse">
+  <li><a href="#inspecting-data-1" id="toc-inspecting-data-1" class="nav-link" data-scroll-target="#inspecting-data-1">Inspecting Data</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#mutate-and-merge-data" id="toc-mutate-and-merge-data" class="nav-link" data-scroll-target="#mutate-and-merge-data">Mutate and Merge Data</a></li>
+  <li><a href="#filter-and-summarize-data" id="toc-filter-and-summarize-data" class="nav-link" data-scroll-target="#filter-and-summarize-data">Filter and Summarize Data</a></li>
+  <li><a href="#grouping-and-summarize-total-claims-by-driverage" id="toc-grouping-and-summarize-total-claims-by-driverage" class="nav-link" data-scroll-target="#grouping-and-summarize-total-claims-by-driverage">Grouping and Summarize total claims by DriverAge</a></li>
+  <li><a href="#premium-calculation" id="toc-premium-calculation" class="nav-link" data-scroll-target="#premium-calculation">Premium Calculation</a></li>
+  <li><a href="#visualize-projected-claims-vs-premium" id="toc-visualize-projected-claims-vs-premium" class="nav-link" data-scroll-target="#visualize-projected-claims-vs-premium">Visualize Projected Claims vs Premium</a></li>
+  <li><a href="#group-data-by-age-and-calculate-average-premium" id="toc-group-data-by-age-and-calculate-average-premium" class="nav-link" data-scroll-target="#group-data-by-age-and-calculate-average-premium">Group Data by Age and Calculate Average Premium</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Fgazzelloni/ACTEX_october2024/edit/main/02_practice_with_r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Fgazzelloni/ACTEX_october2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Introduction to R and Basic Data Analysis</h1>
+<p class="subtitle lead">ACTEX Learning - AFDP: R Session 1.2</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Federica Gazzelloni and Farid Flici </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="getting-into-practice-with-r" class="level1">
+<h1>Getting into Practice with R</h1>
+<p><code>Data manipulation</code> is a fundamental skill in the field of <code>data science</code>. It involves the process of <code>transforming</code>, <code>organizing</code>, and <code>cleaning</code> raw data to make it suitable for analysis and visualization. <code>R</code> can be used in tasks such as determining <code>premium rates</code> for mortality and morbidity products, <code>evaluating the probability</code> of financial loss or return, providing business <code>risk consulting</code>, and <code>planning</code> for pensions and retirement. In essence, <code>R</code> is a powerful tool for actuaries and data scientists to perform complex data analysis and modeling.</p>
+</section>
+<section id="r-packages" class="level1">
+<h1>R Packages</h1>
+<p>R packages are collections of functions, data, and compiled code in a well-defined format. They are stored in a directory called <code>library</code>. A fresh R installation includes a set of packages that are loaded automatically when R starts. These packages are referred to as the base packages. The base packages are always available, and they do not need to be loaded explicitly.</p>
+<p>Others packages are available for download from <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">CRAN (Comprehensive R Archive Network)</a> or other repositories, such as <a href="https://github.com/">GitHub</a> usually for package development versions. To install a package which is stored on CRAN, we can use the <code>install.packages("")</code> function. To load a package, use the <code>library()</code> function.</p>
+</section>
+<section id="data-types" class="level1">
+<h1>Data Types</h1>
+<p>R has several data types, including numeric, character, logical, integer, and complex. The most common data types are:</p>
+<ul>
+<li><code>Numeric</code> - real numbers</li>
+<li><code>Character</code> - text</li>
+<li><code>Logical</code> - TRUE or FALSE</li>
+<li><code>Integer</code> - whole numbers</li>
+</ul>
+<p>It allows data to be on the form of:</p>
+<ul>
+<li><code>Vectors</code> of numbers, characters, or logical values</li>
+<li><code>Matrices</code> which are arrays with two dimensions</li>
+<li><code>Arrays</code> which are multi-dimensional generalizations of matrices</li>
+<li><code>Data Frames</code> which are matrices with columns of different types</li>
+<li><code>Lists</code> which are collections of objects</li>
+</ul>
+</section>
+<section id="basic-r-syntax" class="level1">
+<h1>Basic R Syntax</h1>
+<p>R is a case-sensitive language, meaning that it distinguishes between uppercase and lowercase letters. It uses the <code>#</code> symbol to add comments to the code. Comments are ignored by the R interpreter and are used to explain the code.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic arithmetic and variable assignment</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sum_xy <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sum_xy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple interest formula</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="dv">1000</span>  <span class="co"># Principal</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.05</span>  <span class="co"># Interest rate</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">2</span>     <span class="co"># Time in years</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> P <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> r <span class="sc">*</span> t)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1100</code></pre>
+</div>
+</div>
+</section>
+<section id="r-functions" class="level1">
+<h1>R Functions</h1>
+<p>R is a functional programming language, which means that it is based on functions. Functions are blocks of code that perform a specific task. They take input, process it, and return output.</p>
+<p>There are two types of functions in R: <code>base functions</code> and <code>user-defined functions</code>. Base functions are built into R, while user-defined functions are created by the user.</p>
+<section id="base-functions" class="level2">
+<h2 class="anchored" data-anchor-id="base-functions">Base Functions</h2>
+<p>For example, the <code>mean()</code> function calculates the average of a set of numbers. The <code>mean()</code> function takes a vector of numbers as input and returns the average of those numbers. To access a general function information in R, use the <code>help()</code> function, or the <code>?</code> operator.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">mean</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>c()</code> function is used to combine values into a vector or list.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>Useful base R function:</p>
+<ul>
+<li><code>mean()</code> - calculates the average of a set of numbers</li>
+<li><code>sum()</code> - calculates the sum of a set of numbers</li>
+<li><code>sd()</code> - calculates the standard deviation of a set of numbers</li>
+<li><code>var()</code> - calculates the variance of a set of numbers</li>
+<li><code>min()</code> - returns the minimum value in a set of numbers</li>
+<li><code>max()</code> - returns the maximum value in a set of numbers</li>
+<li><code>length()</code> - returns the length of a vector</li>
+<li><code>str()</code> - displays the structure of an R object</li>
+<li><code>class()</code> - returns the class of an object</li>
+<li><code>typeof()</code> - returns the type of an object</li>
+<li><code>summary()</code> - provides a summary of an object</li>
+<li><code>plot()</code> - creates a plot of data …</li>
+</ul>
+</section>
+<section id="user-defined-functions" class="level2">
+<h2 class="anchored" data-anchor-id="user-defined-functions">User-Defined Functions</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(variables) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Code block</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>avg <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(x)<span class="sc">/</span><span class="fu">length</span>(x)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">avg</span>(x);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="essential-data-preparation-techniques-wrangling-manipulation-and-transformation" class="level1">
+<h1>Essential Data Preparation Techniques: Wrangling, Manipulation, and Transformation</h1>
+<p>Data wrangling, manipulation, and transformation are essential techniques for preparing and refining data for analysis.</p>
+<ul>
+<li><strong>Data wrangling</strong> involves cleaning raw data—handling missing values, correcting errors, and merging datasets—to ensure accuracy and consistency.</li>
+<li><strong>Data manipulation</strong> builds on this by adjusting, filtering, and transforming specific aspects of the data, such as selecting relevant columns, filtering rows based on conditions, and creating new variables.</li>
+<li><strong>Data transformation</strong> goes deeper by reshaping the structure of the data (e.g., converting between wide and long formats), normalizing values, or applying mathematical operations like log transformations to ensure that the data is suitable for complex analysis or modeling.</li>
+</ul>
+<p>These processes, often performed using R packages like dplyr, tidyr, and data.table, are crucial steps in converting raw, disorganized data into meaningful insights. Together, they form the foundation for effective data analytics, which uses cleaned and well-structured data to perform descriptive, predictive, and inferential analyses.</p>
+<p>As an example, consider a dataset with columns for <code>ID</code>, <code>Age</code>, and <code>Salary</code>. We can remove rows with missing values in the <code>Age</code> column and create a new column called <code>IncomeGroup</code> based on the <code>Salary</code> column.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="cn">NA</span>, <span class="dv">45</span>, <span class="dv">35</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Salary =</span> <span class="fu">c</span>(<span class="dv">50000</span>, <span class="dv">60000</span>, <span class="dv">55000</span>, <span class="cn">NA</span>, <span class="dv">70000</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID Age Salary
+1  1  25  50000
+2  2  30  60000
+3  3  NA  55000
+4  4  45     NA
+5  5  35  70000</code></pre>
+</div>
+</div>
+<p>Handling missing values and creating a new variable can be done using the <code>tidyverse</code> set of packages. The <code>dplyr</code> package provides functions (or verbs) for data manipulation, such as <code>filter()</code>, <code>mutate</code>, <code>select()</code>, and more. The <code>magrittr</code> package provides the pipe operator (<code>%&gt;%</code>) used to chain functions together, making the code more readable. Furthermore, the pipe operator has recently been included in base R as well, so called the “tee” operator (<code>|&gt;</code>) or native pipe operator.</p>
+<p>Load the <code>tidyverse</code> package:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove rows with missing Age values</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Age)) <span class="sc">%&gt;%</span>   </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a new column based on Salary</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">IncomeGroup =</span> <span class="fu">ifelse</span>(Salary <span class="sc">&gt;</span> <span class="dv">60000</span>, <span class="st">"High"</span>, <span class="st">"Low"</span>)) </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>cleaned_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID Age Salary IncomeGroup
+1  1  25  50000         Low
+2  2  30  60000         Low
+3  4  45     NA        &lt;NA&gt;
+4  5  35  70000        High</code></pre>
+</div>
+</div>
+<p>An interesting function to use is from the <code>janitor</code> package. The <code>clean_names()</code> function cleans the column names of a data frame by converting them to lowercase, replacing spaces with underscores, and removing special characters.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Clean column names (here the janitor package is called with ::)</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id age salary income_group
+1  1  25  50000          Low
+2  2  30  60000          Low
+3  4  45     NA         &lt;NA&gt;
+4  5  35  70000         High</code></pre>
+</div>
+</div>
+</section>
+<section id="example-1-simulate-claims-data" class="level1">
+<h1>Example 1: Simulate Claims Data</h1>
+<p>In this example we will simulate a dataset of <code>claims data</code>. We will assume that the claims follow an exponential distribution with a mean of 5000. We will simulate 1000 claims and plot the data.</p>
+<p>R provides functions to generate random numbers from different distributions, such as the <code>rexp()</code> function for creating a random exponential distribution, the <code>rnorm()</code> function for a random normal distribution, the <code>runif()</code> function for the uniform distribution, and others.</p>
+<p>We can create a variable by the name of <code>avg_claim_size</code> to store the average claim size and a variable <code>num_claims</code> to store the number of claims to simulate.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>avg_claim_size <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>num_claims <span class="ot">&lt;-</span> <span class="dv">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For reproducibility, we can use the <code>set.seed()</code> function which assures that the random numbers generated are the same each time the code is run. Use the <code>rexp()</code> function to generate random numbers from an exponential distribution. And finally, plot the data using the <code>plot()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>claims <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="at">n =</span> num_claims, </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">rate =</span> <span class="dv">1</span><span class="sc">/</span>avg_claim_size)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(claims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_practice_with_r_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To access the help page for the <code>rexp()</code> function, use the following code: <code>?rexp</code></p>
+<section id="inspecting-data" class="level2">
+<h2 class="anchored" data-anchor-id="inspecting-data">Inspecting Data</h2>
+<p>To inspect data we can use functions such as <code>str()</code>, <code>class()</code>, or <code>typeof()</code>. The <code>str()</code> function provides a compact display of the internal structure of an R object. The <code>class()</code> function returns the class of the object. The <code>typeof()</code> function returns the type of the object. Another function that can be used to inspect data is <code>glimpse()</code> from the <code>dplyr</code> package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(claims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:1000] 4217 2883 6645 158 281 ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(claims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(claims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<p>The <code>claims</code> data is a numeric vector.</p>
+<p>To have a basic summary of the data, we can use the <code>summary()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(claims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+    4.13  1533.46  3655.83  5149.90  7133.18 36055.04 </code></pre>
+</div>
+</div>
+</section>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
+<p>There are a set of functions in base R for data visualization, such as <code>plot()</code>, <code>hist()</code>, and <code>boxplot()</code>, to create scatter plots, line plots, bar plots, histograms, and box plots.</p>
+<p>For example, to make an histogram of the claims data, use the <code>hist()</code> function. The <code>breaks</code> argument specifies the number of intervals to divide the data into.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(claims, <span class="at">breaks =</span> <span class="dv">30</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_practice_with_r_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In addition, for a more customized plot, we can use the <code>ggplot2</code> package, part of the <code>tidyverse</code> set of packages. The <code>ggplot()</code> function initializes a plot, and the <code>geom_&lt;&gt;()</code> functions add layers to the plot, the layers are chained using the <code>+</code> operator. More information on <code>ggplot2</code> can be found in the <strong>ggplot2: Elegant Graphics for Data Analysis</strong> book by Hadley Wickham.</p>
+<p>We can produce the same histogram as before using <code>ggplot2</code>, but first we need to convert the claims vector to be a data frame.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1123</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>claims_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">claim_id =</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>num_claims, </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">size =</span> num_claims, </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">replace =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">claim_amount =</span> claims)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(claims_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  claim_id claim_amount
+1      624    4217.2863
+2      102    2883.0514
+3      427    6645.2743
+4      324     157.8868
+5      912     281.0549
+6      380    1582.5061</code></pre>
+</div>
+</div>
+<p>To create the histogram using <code>ggplot2</code>, we add the aesthetics of the plot using the <code>aes()</code> function, specify the x-axis and y-axis variables, and use the <code>geom_histogram()</code> function to create the histogram. The <code>labs()</code> function is used to add titles to the plot. There are other customizations that can be added to the plot, such as color, fill, and more.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> claims_df, </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> claim_amount)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Simulated Claims Data"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Claim Amount"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_practice_with_r_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="example-2-motor-insurance-claims-data" class="level1">
+<h1>Example 2: Motor Insurance Claims Data</h1>
+<p>For this example, we will use the French Motor Third-Part Liability datasets: <code>freMTPL2freq</code> and <code>freMTPL2sev</code>. The datasets contain the frequency and severity of claims for a motor insurance portfolio.</p>
+<p>The datasets are from the <code>CASdatasets</code> R-package, which provides a collection of datasets for actuarial science used in the book <strong>“Computational Actuarial Science with R”</strong> by Arthur Charpentier and Rob Kaas. We do not need to install the package as the data we need is already available in the <code>data</code> folder of this project. For more information on how to install the <code>CASdatasets</code> package please check the <code>helper00.R</code> file in the project folder.</p>
+<p>Data can be accessed by loading it into the R environment with the <code>load()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># freMTPLfreq has been reduced to 1000 rows for demonstration purposes</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/freMTPLfreq_1000.rda"</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/freMTPLsev.rda"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>R allows the user to manage different types of data, such as .Rdata, .rda, .rds, .csv, .txt, .xls, .xlsx, among others. The different types of data can be loaded into R using functions like <code>load()</code>, <code>read.csv()</code>, <code>read.table()</code>, <code>read_excel()</code>, and others. Each of these types of files occupies a specific format in memory.</p>
+<p>The R Data Format Family, usually with extension . rdata or . rda, is a format designed for use with R for storing a complete R workspace or selected “objects” from a workspace in a form that can be loaded back by R. Once the file is loaded into R, the data is stored in the <code>Environment</code> as an object. The object can be accessed by its name.</p>
+<p>Here we look at the first few rows of each dataset:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(freMTPLfreq)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PolicyID ClaimNb Exposure Power CarAge DriverAge
+1        1       0     0.09     g      0        46
+2        2       0     0.84     g      0        46
+3        3       0     0.52     f      2        38
+4        4       0     0.45     f      2        38
+5        5       0     0.15     g      0        41
+6        6       0     0.75     g      0        41
+                               Brand     Gas             Region Density
+1 Japanese (except Nissan) or Korean  Diesel          Aquitaine      76
+2 Japanese (except Nissan) or Korean  Diesel          Aquitaine      76
+3 Japanese (except Nissan) or Korean Regular Nord-Pas-de-Calais    3003
+4 Japanese (except Nissan) or Korean Regular Nord-Pas-de-Calais    3003
+5 Japanese (except Nissan) or Korean  Diesel   Pays-de-la-Loire      60
+6 Japanese (except Nissan) or Korean  Diesel   Pays-de-la-Loire      60</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(freMTPLsev)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PolicyID ClaimAmount
+1    63987        1172
+2   310037        1905
+3   314463        1150
+4   318713        1220
+5   309380       55077
+6   309380        7593</code></pre>
+</div>
+</div>
+<section id="inspecting-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="inspecting-data-1">Inspecting Data</h2>
+<p>The <code>freMTPLfreq</code> dataset contains the risk features and the claim number, while the <code>freMTPLsev</code> dataset contains the claim amount and the corresponding policy ID.</p>
+<p>We can use the <code>glimpse()</code> function from the <code>dplyr</code> package to get a quick overview of the datasets.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(freMTPLfreq))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 6
+Columns: 10
+$ PolicyID  &lt;fct&gt; 1, 2, 3, 4, 5, 6
+$ ClaimNb   &lt;int&gt; 0, 0, 0, 0, 0, 0
+$ Exposure  &lt;dbl&gt; 0.09, 0.84, 0.52, 0.45, 0.15, 0.75
+$ Power     &lt;fct&gt; g, g, f, f, g, g
+$ CarAge    &lt;int&gt; 0, 0, 2, 2, 0, 0
+$ DriverAge &lt;int&gt; 46, 46, 38, 38, 41, 41
+$ Brand     &lt;fct&gt; "Japanese (except Nissan) or Korean", "Japanese (except Niss…
+$ Gas       &lt;fct&gt; Diesel, Diesel, Regular, Regular, Diesel, Diesel
+$ Region    &lt;fct&gt; Aquitaine, Aquitaine, Nord-Pas-de-Calais, Nord-Pas-de-Calais…
+$ Density   &lt;int&gt; 76, 76, 3003, 3003, 60, 60</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(freMTPLsev))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 6
+Columns: 2
+$ PolicyID    &lt;int&gt; 63987, 310037, 314463, 318713, 309380, 309380
+$ ClaimAmount &lt;int&gt; 1172, 1905, 1150, 1220, 55077, 7593</code></pre>
+</div>
+</div>
+<p>Check if there are any missing values in the datasets using the <code>any()</code> function. The <code>is.na()</code> function checks for missing values in the dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(freMTPLfreq));</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(freMTPLsev))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
+<p>The two datasets have a common variable, <code>PolicyID</code>, which can be used as a key to merge the datasets to create a single dataset that contains both the frequency and severity of claims.</p>
+<p>Something to notice is that <code>PolicyID</code> is stored as a character variable in the <code>freMTPLfreq</code> dataset and as an integer variable in the <code>freMTPLsev</code> dataset. So, in order to proceed with merging the two sets, we need to transform the <code>PolicyID</code> variable in the <code>freMTPLfreq</code> dataset to an integer type.</p>
+</section>
+<section id="mutate-and-merge-data" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-and-merge-data">Mutate and Merge Data</h2>
+<p>The <code>mutate()</code> function is used to create a new variable, or to make a modification to an existing one, as in this case, to transform <code>PolicyID</code> as an integer type.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>freMTPLfreq <span class="ot">&lt;-</span> freMTPLfreq <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PolicyID =</span> <span class="fu">as.integer</span>(PolicyID))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We could have done this with base R as well, using the <code>as.integer()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>freMTPLfreq<span class="sc">$</span>PolicyID <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(freMTPLfreq<span class="sc">$</span>PolicyID)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The way to use the <code>$</code> operator is to access a variable in a data frame. The <code>class()</code> function is used to check the class of the modified object.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>freMTPLfreq<span class="sc">$</span>PolicyID <span class="sc">%&gt;%</span> <span class="fu">class</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+</div>
+<p>We can now combine the two datasets using the <code>merge()</code> function from base R which merges two datasets based on a common variable, in this case, the <code>PolicyID</code> variable.</p>
+<p>There are other functions that can be used to merge datasets, such as <code>inner_join()</code>, <code>left_join()</code>, <code>right_join()</code>, and <code>full_join()</code> from the <code>dplyr</code> package, depending on the desired output.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>claims_data_raw <span class="ot">&lt;-</span> freMTPLfreq <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(freMTPLsev, <span class="at">by =</span> <span class="st">"PolicyID"</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>claims_data_raw <span class="sc">%&gt;%</span> <span class="fu">dim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30 11</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>claims_data_raw <span class="sc">%&gt;%</span> <span class="fu">names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "PolicyID"    "ClaimNb"     "Exposure"    "Power"       "CarAge"     
+ [6] "DriverAge"   "Brand"       "Gas"         "Region"      "Density"    
+[11] "ClaimAmount"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>claims_data_raw <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PolicyID        ClaimNb         Exposure          Power       CarAge      
+ Min.   : 33.0   Min.   :1.000   Min.   :0.0100   g      :6   Min.   : 0.000  
+ 1st Qu.:377.2   1st Qu.:1.000   1st Qu.:0.4775   i      :5   1st Qu.: 0.000  
+ Median :497.0   Median :1.000   Median :0.6500   e      :4   Median : 0.000  
+ Mean   :506.4   Mean   :1.267   Mean   :0.5507   j      :4   Mean   : 2.733  
+ 3rd Qu.:703.0   3rd Qu.:1.750   3rd Qu.:0.7150   l      :4   3rd Qu.: 6.500  
+ Max.   :956.0   Max.   :2.000   Max.   :0.9600   d      :3   Max.   :10.000  
+                                                  (Other):4                   
+   DriverAge                                    Brand         Gas    
+ Min.   :22.00   Fiat                              : 0   Diesel : 5  
+ 1st Qu.:38.25   Japanese (except Nissan) or Korean:27   Regular:25  
+ Median :50.00   Mercedes, Chrysler or BMW         : 0               
+ Mean   :47.97   Opel, General Motors or Ford      : 1               
+ 3rd Qu.:51.00   other                             : 0               
+ Max.   :78.00   Renault, Nissan or Citroen        : 2               
+                 Volkswagen, Audi, Skoda or Seat   : 0               
+                Region      Density       ClaimAmount    
+ Ile-de-France     :21   Min.   :   23   Min.   :  73.0  
+ Aquitaine         : 5   1st Qu.: 1724   1st Qu.: 580.5  
+ Pays-de-la-Loire  : 2   Median : 3121   Median :1048.5  
+ Basse-Normandie   : 1   Mean   : 9288   Mean   :1873.4  
+ Nord-Pas-de-Calais: 1   3rd Qu.:16786   3rd Qu.:1446.8  
+ Bretagne          : 0   Max.   :27000   Max.   :9924.0  
+ (Other)           : 0                                   </code></pre>
+</div>
+</div>
+</section>
+<section id="filter-and-summarize-data" class="level2">
+<h2 class="anchored" data-anchor-id="filter-and-summarize-data">Filter and Summarize Data</h2>
+<p>We can filter the data to include only claims greater than 1000 and summarize the total claims by year. The <code>group_by()</code> function is used to group the data by a specific variable, and the <code>reframe()</code> function is used to calculate summary statistics for each group.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter data for claims greater than 1000</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>high_claims <span class="ot">&lt;-</span> claims_data_raw <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ClaimAmount <span class="sc">&gt;</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> high_claims, </span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(DriverAge), <span class="at">y =</span> ClaimAmount)) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"High Claims by Driver Age"</span>,</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Driver Age"</span>,</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Claim Amount"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_practice_with_r_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="grouping-and-summarize-total-claims-by-driverage" class="level2">
+<h2 class="anchored" data-anchor-id="grouping-and-summarize-total-claims-by-driverage">Grouping and Summarize total claims by DriverAge</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>claims_summary <span class="ot">&lt;-</span> claims_data_raw <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DriverAge) <span class="sc">%&gt;%</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">TotalClaims =</span> <span class="fu">sum</span>(ClaimAmount))</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>claims_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 19 × 2
+   DriverAge TotalClaims
+       &lt;int&gt;       &lt;int&gt;
+ 1        22        3409
+ 2        24        1418
+ 3        27         508
+ 4        28        1344
+ 5        32         936
+ 6        34        1390
+ 7        35         747
+ 8        36        1449
+ 9        45        1274
+10        47        1584
+11        49        3532
+12        50        3909
+13        51       13868
+14        53        9105
+15        61         302
+16        68        1107
+17        71        6518
+18        74        3332
+19        78         471</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> claims_summary, </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(DriverAge), <span class="at">y =</span> TotalClaims)) <span class="sc">+</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fix the bar plot</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Claims by Driver Age"</span>,</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Driver Age"</span>,</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Claim Amount"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_practice_with_r_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="premium-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="premium-calculation">Premium Calculation</h2>
+<p>Let’s calculate the <code>Premium formula</code> for the claims data. The premium formula is given by:</p>
+<p><span class="math display">\[Premium = \frac{(\text{projected claims} + \text{fixed expenses)}}{(1-\text{expenses as % of premium)}}\]</span> We calculate the projected claims as the product of the number of claims (<code>ClaimNb</code>) and the amount of claims (<code>ClaimAmount</code>). Then, we simulate fixed expenses as a random number between 100 and 500, and the expenses as a percentage of premium between 10% and 30%, with <code>runif()</code> functions.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting seed for reproducibility</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) </span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>claims_data <span class="ot">&lt;-</span> claims_data_raw <span class="sc">%&gt;%</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulate projected claims between 1000 and 5000</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">projected_claims =</span> ClaimNb <span class="sc">*</span> ClaimAmount,  </span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulate fixed expenses between 100 and 500</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fixed_expenses =</span> <span class="fu">runif</span>(<span class="fu">n</span>(), <span class="dv">100</span>, <span class="dv">500</span>),      </span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulate expenses percentage between 10% and 30%</span></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">expenses_as_percent_of_premium =</span> <span class="fu">runif</span>(<span class="fu">n</span>(), <span class="fl">0.1</span>, <span class="fl">0.3</span>)</span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>With the <code>mutate()</code> function we create the <code>Premium</code> variable using the formula provided. The <code>dim()</code> function is used to check the dimensions of the dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Premium using the given formula</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>claims_data <span class="ot">&lt;-</span> claims_data <span class="sc">%&gt;%</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Premium =</span> (projected_claims <span class="sc">+</span> fixed_expenses) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> expenses_as_percent_of_premium)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>claims_data <span class="sc">%&gt;%</span> <span class="fu">dim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30 15</code></pre>
+</div>
+</div>
+<p>To select specific columns from a dataset we can use the <code>select()</code> function from the <code>dplyr</code> package. Then, the <code>head()</code> function is used to display the first few rows of the dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View the results</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>claims_data <span class="sc">%&gt;%</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(PolicyID, </span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>         projected_claims, </span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>         fixed_expenses, </span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>         expenses_as_percent_of_premium,</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>         Premium) <span class="sc">%&gt;%</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PolicyID projected_claims fixed_expenses expenses_as_percent_of_premium
+1       33              302       465.9224                      0.2475191
+2       41             2001       474.8302                      0.2622110
+3       92             1449       214.4558                      0.1776217
+4       96             1892       432.1791                      0.2370339
+5       96            19848       356.6982                      0.1007897
+6      142             1390       307.6384                      0.2665832
+    Premium
+1  1020.521
+2  3355.743
+3  2022.738
+4  3046.242
+5 22469.380
+6  2314.698</code></pre>
+</div>
+</div>
+</section>
+<section id="visualize-projected-claims-vs-premium" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-projected-claims-vs-premium">Visualize Projected Claims vs Premium</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> claims_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Premium <span class="sc">&lt;</span> <span class="dv">10000</span>), </span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> projected_claims, <span class="at">y =</span> Premium)) <span class="sc">+</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add points</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add a smooth line</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Projected Claims vs Premium"</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Projected Claims"</span>,</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Premium"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_practice_with_r_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="group-data-by-age-and-calculate-average-premium" class="level2">
+<h2 class="anchored" data-anchor-id="group-data-by-age-and-calculate-average-premium">Group Data by Age and Calculate Average Premium</h2>
+<p>Let’s check the range of the <code>DriverAge</code> variable and group the data by age to calculate the average premium for each age group.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(claims_data<span class="sc">$</span>DriverAge)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22 78</code></pre>
+</div>
+</div>
+<p>Finally, we group the data by 5 years age group and calculate the average premium for each age group using the <code>cut()</code> function to create age groups.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>claims_data <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DriverAge_group =</span> <span class="fu">cut_interval</span>(DriverAge, </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">n =</span> <span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DriverAge_group) <span class="sc">%&gt;%</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">avg_Premium =</span> <span class="fu">mean</span>(Premium))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  DriverAge_group avg_Premium
+  &lt;fct&gt;                 &lt;dbl&gt;
+1 [22,33.2]             2501.
+2 (33.2,44.4]           1796.
+3 (44.4,55.6]           4439.
+4 (55.6,66.8]           1021.
+5 (66.8,78]             4020.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>claims_data_ag <span class="ot">&lt;-</span> claims_data <span class="sc">%&gt;%</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DriverAge_group =</span> <span class="fu">cut</span>(DriverAge, </span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">35</span>, </span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="dv">45</span>, <span class="dv">55</span>, <span class="dv">65</span>, </span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="dv">75</span>, <span class="dv">85</span>, <span class="dv">95</span>, <span class="dv">99</span>),</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">include.lowest =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(DriverAge_group) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DriverAge_group) <span class="sc">%&gt;%</span></span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">avg_Premium =</span> <span class="fu">mean</span>(Premium)) </span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a>claims_data_ag</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  DriverAge_group avg_Premium
+  &lt;fct&gt;                 &lt;dbl&gt;
+1 [18,25]               3750.
+2 (25,35]               1674.
+3 (35,45]               2119.
+4 (45,55]               4578.
+5 (55,65]               1021.
+6 (65,75]               5055.
+7 (75,85]                915.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>claims_data_ag <span class="sc">%&gt;%</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> DriverAge_group, <span class="at">y =</span> avg_Premium)) <span class="sc">+</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Premium by Age Group"</span>,</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Driver Age Group"</span>,</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Premium"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_practice_with_r_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>In this lesson, we have introduced the basics of R programming, including functions, data types, and syntax. We have explored data manipulation techniques using base R functions and the <code>tidyverse</code> set of packages. We have also worked with simulated and real-world claims data to perform data wrangling, manipulation, and visualization.</p>
+<p>R is a powerful tool for actuaries and data scientists, offering a wide range of functions and packages for data analysis, modeling, and visualization. By mastering R programming, actuaries can enhance their analytical skills, improve decision-making, and drive innovation in the insurance industry.</p>
+<p>In the next lesson, we will delve deeper into data analysis and modeling techniques, exploring predictive modeling using R.</p>
+</section>
+<section id="resources" class="level1">
+<h1>Resources</h1>
+<ul>
+<li>Charpentier, A., &amp; Kaas, R. (2014). <a href="https://www.amazon.it/Computational-Actuarial-Science-Arthur-Charpentier/dp/1466592591">Computational Actuarial Science with R. CRC Press</a></li>
+<li>Wickham, H. (2016). <a href="https://ggplot2-book.org/">ggplot2: Elegant Graphics for Data Analysis</a></li>
+<li>Tidyverse (2021). <a href="https://www.tidyverse.org/">Tidyverse: Easily Install and Load the ‘Tidyverse’</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bookdown\.org\/federicagazzelloni\/ACTEX_october2024\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01_introduction_to_r.html" class="pagination-link" aria-label="Introduction to R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction to R</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03_introduction_to_pm.html" class="pagination-link" aria-label="Introduction to Predictive Modeling">
+        <span class="nav-page-text">Introduction to Predictive Modeling</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© CC-By AFDP 2024 - ACTEX Learning</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Fgazzelloni/ACTEX_october2024/edit/main/02_practice_with_r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Fgazzelloni/ACTEX_october2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
