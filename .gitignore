@@ -9,3 +9,4 @@ material/bunker
 _site
 rsconnect
 scripts
+**/*.quarto_ipynb

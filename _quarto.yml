@@ -4,8 +4,8 @@ project:
 website:
   page-navigation: true
   title: "Introduction to R and Basic Data Analysis"
-  site-url: "https://bookdown.org/federicagazzelloni/ACTEX_october2024/" 
-  repo-url: https://github.com/Fgazzelloni/ACTEX_october2024
+  site-url: "https://fgazzelloni.github.io/ACTEX_october2024/" 
+  repo-url: "https://github.com/Fgazzelloni/ACTEX_october2024"
   repo-actions: [edit, issue]
   
   page-footer:
